@@ -1,1 +1,1 @@
-Group Folder for The Enchanted Badgers
+Group Folder for The Enchanted Badgers (Alexander Einarsson, Sergio Servantez, Marko Sterbentz)
