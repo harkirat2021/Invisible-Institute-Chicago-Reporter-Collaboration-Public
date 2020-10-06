@@ -3,9 +3,9 @@
  or unknown consequences recorded in the data?
  */
 
-select t1.allegation_name, t.final_outcome, t1.category, t1.citizen_dept, count(*) number_of_allegations
+select t1.category, count(*) number_of_allegations
     from (
-        select distinct t1.allegation_name, t.allegation_category_id, t1.category, t1.citizen_dept
+        select distinct t1.category, t.allegation_category_id, t1.citizen_dept
             from public.data_allegationcategory t1
                      inner join
                  (select distinct t.allegation_category_id
@@ -19,7 +19,7 @@ select t1.allegation_name, t.final_outcome, t1.category, t1.citizen_dept, count(
                  on t1.id = t.allegation_category_id
                 ) t1
     inner join public.data_officerallegation t on t1.allegation_category_id = t.allegation_category_id
-    group by allegation_name, final_outcome, t1.category, t1.citizen_dept
+    group by t1.category
     order by number_of_allegations desc;
 
 /*
@@ -27,9 +27,9 @@ select t1.allegation_name, t.final_outcome, t1.category, t1.citizen_dept, count(
  consequences recorded in the data?
  */
 
- select t1.allegation_name, t.final_outcome, t1.category, t1.citizen_dept, count(*) number_of_allegations
+ select t1.category, count(*) number_of_allegations
     from (
-        select distinct t1.allegation_name, t.allegation_category_id, t1.category, t1.citizen_dept
+        select distinct t.allegation_category_id, t1.category, t1.citizen_dept
             from public.data_allegationcategory t1
                      inner join
                  (select distinct t.allegation_category_id
@@ -43,5 +43,5 @@ select t1.allegation_name, t.final_outcome, t1.category, t1.citizen_dept, count(
                  on t1.id = t.allegation_category_id
                 ) t1
     inner join public.data_officerallegation t on t1.allegation_category_id = t.allegation_category_id
-    group by allegation_name, final_outcome, t1.category, t1.citizen_dept
+    group by t1.category
     order by number_of_allegations desc;
