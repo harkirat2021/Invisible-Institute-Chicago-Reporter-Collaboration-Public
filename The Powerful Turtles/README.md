@@ -17,7 +17,7 @@ complainants and the respective police officers they reported correlate to the n
 complaints. With such a relationship, we can predict a police officer’s likelihood to be reported for
 misconduct given the police-citizen demographic pairing.
 
-**[Checkpoint-1: Relational Analytics Questions:](https://github.com/YunanWu2168/Invisible-Institute-Chicago-Reporter-Collaboration-Public/tree/master/The%20Powerful%20Turtles/checkpoint-1)**
+**[Checkpoint-1: Relational Analytics Questions:](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/tree/master/The%20Powerful%20Turtles/checkpoint-1)**
 
 1. What is the race distribution among the officers? 
 
