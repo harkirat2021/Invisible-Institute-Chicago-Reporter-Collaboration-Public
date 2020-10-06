@@ -15,7 +15,7 @@ For Checkpoint 1, our team explores the dataset with SQL in three general areas.
 
 1. From xxxx.sql, we craft complex queries to identify crew membership. 
 
-2. From network_graphs.sql we explore how to create a network graph, in table format, on the cpdb dataset. When connected to the database, run the queries as prompted in the file's comments, in sequence, to see how we are thinking about tackling the technical challenge. 
+2. From network_graphs.sql we explore how to create a network graph, in table format, on the cpdb dataset. When connected to the database, run the queries as prompted in the file's comments, in sequence, to see how we are thinking about tackling the technical challenge. At a high-leve, the premise is to take a list of officers that are known or suspected of being in the same crew, parse that list of officer_ids into a table of nodes, and then derive a table of edges that connect one node to another. If successful, we propose that this type of analysis may help identify how different crews are inter-related. 
 
 3. From xxx.sql we add to our first set queries to add a geospatial component. 
 
