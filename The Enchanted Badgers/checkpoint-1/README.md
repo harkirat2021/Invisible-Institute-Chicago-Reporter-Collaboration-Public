@@ -81,6 +81,7 @@ This should result in a table that looks like the following.
  Drug / Alcohol Abuse | 58.68924889543447
 (2 rows)
 ```
+The first row of this table shows the category of complaints that is least likely to be sustained (Money / Property), and the second row shows the category that is most likely to be sustained (Drug / Alcohol Abuse).
 
 ### Question 3: Which category of complaints are most and least likely to have severe consequences for the accused officers (more than a reprimand)?
 
@@ -133,6 +134,7 @@ This should result in two tables that looks like the following.
  Drug / Alcohol Abuse |                     1
 (3 rows)
 ```
+The first table shows all categories with no severe consequences, as well as the total number of allegations for these categories. This query is restrictive in that it assumes the outcome "Unknown" includes severe consequences.
 
 ```
             category            | number_of_allegations 
@@ -152,6 +154,7 @@ This should result in two tables that looks like the following.
  Conduct Unbecoming (Off-Duty)  |                     3
 (13 rows)
 ```
+The second table again shows all categories with no severe consequences, along with the total number of allegations for these categories. This query is less restrictive in that it assumes the outcome "Unknown" means the consequence was not severe.
 
 ### Question 5: What percentage of complaints are categorized as other, or not categorized at all (year over year)?
 
