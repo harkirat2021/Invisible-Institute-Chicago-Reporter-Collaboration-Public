@@ -4,7 +4,7 @@
 
 **Theme**
 
-To see if the officers are representative of the people they serve in each community and if the complaint makeup changes based on officer-demographic-community pairings
+In this project, we would like to study how the demographics comparison between the complainants and the respective police officers reported correlating to the number of complaints. In this checkpoint, we extracted and analyzed the demographic data of officers, complainants, and their corresponding community. Then, we performed some inter-group demographic analyses to observe some correlation within these data. The data and findings from this checkpoint will be the foundation of the succeeding checkpoints.
 
 **Relational Analytics Questions:**
 
