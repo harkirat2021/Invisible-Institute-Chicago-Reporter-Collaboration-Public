@@ -1,5 +1,7 @@
 By: Pengyi Shi, Milan McGraw, and Justin Chae
+
 Project Title: Network Graphs of Arresting Officers 
+
 Date: 6 October 2020
 
 THEME
