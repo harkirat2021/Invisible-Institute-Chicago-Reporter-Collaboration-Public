@@ -1,1 +1,2 @@
-members: Pengyi Shi, Milan McGraw, and Justin Chae
+Members: 
+Pengyi Shi, Milan McGraw, and Justin Chae
