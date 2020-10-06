@@ -1,3 +1,4 @@
+/* First run to retrieve officer crews were were disciplined together and their team size */
 
 SELECT distinct a.id, c.crid, count(c.crid) over (partition by crid) as team_count, c.beat_id, d.name as location_area, c.incident_date, a.allegation_count,c.coaccused_count
 FROM data_officer a
