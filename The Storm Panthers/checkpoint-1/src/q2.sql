@@ -18,6 +18,6 @@ WITH officer_allegations AS (SELECT * FROM data_allegationcategory
 allegations_home_distinct AS (SELECT DISTINCT allegation_id FROM officer_allegations
     WHERE location = 'Residence' OR location = 'Apartment' OR location = 'Private Residence'
     OR location = 'Other Private Premise')
-SELECT allegations_home_distinct.allegation_id AS allegation_id, add1, add2, city, incident_date, location 
-FROM allegations_home_distinct INNER JOIN officer_allegations ON
+SELECT DISTINCT allegations_home_distinct.allegation_id AS allegation_id, add1, add2, city, incident_date,
+       beat_id, location FROM allegations_home_distinct INNER JOIN officer_allegations ON
            allegations_home_distinct.allegation_id = officer_allegations.allegation_id;
