@@ -9,6 +9,7 @@
 
 ## Questions answered
 (1) What is the most common offense that leads to discipline?
+(1 follow-up) What are the discipline rates for different offenses/misconducts?
 (2) What is the most common offense that leads to settlement?
 (3) What is the average number of unit changes over a total career for disciplined vs. not disciplined cops?
 (4) What is the type of discipline that officers receive the most?
