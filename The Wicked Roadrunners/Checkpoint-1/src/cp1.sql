@@ -1,54 +1,14 @@
 /* 1. What is the most common offense/misconduct that leads to discipline? */
--- SELECT category
--- FROM data_allegationcategory AS t1
--- INNER JOIN
--- (SELECT allegation_category_id AS allegation_category_id_mode
--- FROM data_officerallegation
--- WHERE disciplined IS TRUE
--- GROUP BY allegation_category_id
--- ORDER BY (COUNT(allegation_category_id)) DESC
--- LIMIT 1) AS t2
--- ON t1.id = t2.allegation_category_id_mode;
-
-
--- (SELECT category, COUNT(category) as total_count
--- FROM data_allegationcategory AS t1
--- INNER JOIN
--- (SELECT allegation_category_id as category_id
--- FROM data_officerallegation
--- GROUP BY id
--- ORDER BY COUNT(allegation_category_id) DESC) as t2
--- on t1.id = t2.category_id
--- GROUP BY category
--- ORDER BY COUNT(category)) as t3;
-select t6.category, (1.0 * disc_count) / (1.0 * total_count) as disc_percent
-from
-(SELECT category, COUNT(category) as disc_count
+SELECT category
 FROM data_allegationcategory AS t1
 INNER JOIN
-(SELECT allegation_category_id as category_id
+(SELECT allegation_category_id AS allegation_category_id_mode
 FROM data_officerallegation
-WHERE disciplined = true
-GROUP BY id
-ORDER BY COUNT(allegation_category_id) DESC) as t2
-on t1.id = t2.category_id
-GROUP BY category
-ORDER BY COUNT(category)) as t3
-FULL OUTER JOIN
-(SELECT category, COUNT(category) as total_count
-FROM data_allegationcategory AS t4
-INNER JOIN
-(SELECT allegation_category_id as category_id
-FROM data_officerallegation
-GROUP BY id
-ORDER BY COUNT(allegation_category_id) DESC) as t5
-on t4.id = t5.category_id
-GROUP BY category
-ORDER BY COUNT(category)) as t6
-ON t3.category = t6.category
-order by disc_percent DESC;
-
-/*
+WHERE disciplined IS TRUE
+GROUP BY allegation_category_id
+ORDER BY (COUNT(allegation_category_id)) DESC
+LIMIT 1) AS t2
+ON t1.id = t2.allegation_category_id_mode;
 
 
 /* 2. What is the most common offense/misconduct that leads to settlement? */
@@ -93,4 +53,3 @@ ORDER BY COUNT(*) DESC
 LIMIT 1;
 
 
- */
