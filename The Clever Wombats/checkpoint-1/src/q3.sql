@@ -1,12 +1,9 @@
--- number of allegations broken down by region
-select count, sub.year, data_area.*
-from data_area
+select o.id, o.allegation_count, oh1.num_trans, o.*
+from data_officer o
 join (
-    select ar.id, extract(year from al.incident_date) as year, count(*)
-    from data_allegation al
-    join data_area ar
-    on st_contains(ar.polygon, al.point)
-    group by ar.id, year
-    ) sub
-on data_area.id = sub.id
-order by id, year desc;
+    select officer_id, count(*) as num_trans
+    from data_officerhistory
+    group by  officer_id
+    ) oh1
+on oh1.officer_id = o.id
+order by num_trans desc;
