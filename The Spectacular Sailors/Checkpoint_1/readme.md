@@ -10,3 +10,11 @@ The theme of this project is to improve how crew membership is defined by analyz
 Summary of Checkpoint 1
 
 For Checkpoint 1, our team explores the dataset with SQL in three general areas. First, we craft a query that attempts to identify crew membership by combining data allegations and officers that are co-accused. Second, we learn technical aspects of how to create and represent network graphs in SQL tables and queries. Third, and lastly, we explore how to query and join tables with address or geospatial data to identify where crews operate.
+
+1. From xxxx.sql, we craft complex queries to identify crew membership. 
+
+2. From network_graphs.sql we explore how to create a network graph, in table format, on the cpdb dataset. When connected to the database, run the queries as prompted in the file's comments, in sequence, to see how we are thinking about tackling the technical challenge. 
+
+3. From xxx.sql we add to our first set queries to add a geospatial component. 
+
+
