@@ -20,64 +20,63 @@
 ### Question glossary and expected output
 
 #### q1_a: How many officers who were involved in a “Search Of Premise Without Warrant” are still on the force today, and what proportion of all officers involved in these illegal searches do they constitute?
-```
- count_active | count_all | percent_active 
---------------+-----------+----------------
-        13386 |     25292 |          52.93
-(1 row)
-```
+
+| count\_active | count\_all | percent\_active |
+| :--- | :--- | :--- |
+| 13386 | 25292 | 52.93 |
+
+
 
 #### q1_b: Are there any officers who’ve been involved in more than one home invasion? What are their IDs and number of illegal searches? How many total repeaters are there?
-```
- number_of_repeaters 
----------------------
-                2569
-(1 row)
 
-officer_id | count 
-------------+-------
-      12478 |    41
-      27778 |    39
-      17397 |    32
-       5913 |    29
-      26096 |    29
-      25306 |    28
-       5193 |    28
-       2725 |    28
-      11634 |    26
-      22828 |    26
-      13095 |    26
-      18205 |    26
-       6678 |    25
-      21703 |    24
-      19888 |    23
-      28280 |    23
-      12491 |    23
-      28378 |    22
-      24521 |    21
-      13420 |    21
-      21260 |    21
-(... and more rows)
-```
+| number\_of\_repeaters |
+| :--- |
+| 2569 |
 
-#### q1_c: How many instances of a “Search Of Premise Without Warrant” occurred at someone’s home (Apartment, Other Private Premise, Private Residence, or Residence)? Then, list these allegations and other relevant data (address, incident date, etc).
-```
-home_invasion_allegation_count 
---------------------------------
-                           2840
-(1 row)
+| officer\_id | count |
+| :--- | :--- |
+| 12478 | 41 |
+| 27778 | 39 |
+| 17397 | 32 |
+| 5913 | 29 |
+| 26096 | 29 |
+| 25306 | 28 |
+| 5193 | 28 |
+| 2725 | 28 |
+| 11634 | 26 |
+| 22828 | 26 |
+| 13095 | 26 |
+| 18205 | 26 |
+| 6678 | 25 |
+| 21703 | 24 |
+| 19888 | 23 |
+| 28280 | 23 |
+| 12491 | 23 |
+| 28378 | 22 |
+| 24521 | 21 |
+| 13420 | 21 |
+| 21260 | 21 |
+| ...  | ... |
 
- allegation_id | add1  |               add2                |          city           |     incident_date      |       location        
----------------+-------+-----------------------------------+-------------------------+------------------------+-----------------------
- 1053874       |       |                                   |                         | 2012-05-05 00:00:00+00 | Private Residence
- 314810        |       |                                   |                         | 2006-08-09 00:00:00+00 | Private Residence
- 1082022       | 127XX | South SANGAMON ST                 | CHICAGO ILLINOIS 60643  | 2016-08-28 00:00:00+00 | Residence
- 1082022       | 127XX | South SANGAMON ST                 | CHICAGO ILLINOIS 60643  | 2016-08-28 00:00:00+00 | Residence
- 1082289       | 46XX  | West JACKSON BLVD #1A             | CHICAGO ILLINOIS 60644  | 2016-09-16 00:00:00+00 | Apartment
- 1082289       | 46XX  | West JACKSON BLVD #1A             | CHICAGO ILLINOIS 60644  | 2016-09-16 00:00:00+00 | Apartment
- 1082289       | 46XX  | West JACKSON BLVD #1A             | CHICAGO ILLINOIS 60644  | 2016-09-16 00:00:00+00 | Apartment
-(... and more rows)
-```
+
+
+#### q2: How many instances of a “Search Of Premise Without Warrant” occurred at someone’s home (Apartment, Other Private Premise, Private Residence, or Residence)? Then, list these allegations and other relevant data (address, incident date, etc).
+| home\_invasion\_allegation\_count |
+| :--- |
+| 2840 |
+
+
+| allegation\_id | add1 | add2 | city | incident\_date | location |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1053874 |  |  |  | 2012-05-05 00:00:00.000000 | Private Residence |
+| 314810 |  |  |  | 2006-08-09 00:00:00.000000 | Private Residence |
+| 1082022 | 127XX | South SANGAMON ST | CHICAGO ILLINOIS 60643 | 2016-08-28 00:00:00.000000 | Residence |
+| 1082022 | 127XX | South SANGAMON ST | CHICAGO ILLINOIS 60643 | 2016-08-28 00:00:00.000000 | Residence |
+| 1082289 | 46XX | West JACKSON BLVD #1A | CHICAGO ILLINOIS 60644 | 2016-09-16 00:00:00.000000 | Apartment |
+| 1082289 | 46XX | West JACKSON BLVD #1A | CHICAGO ILLINOIS 60644 | 2016-09-16 00:00:00.000000 | Apartment |
+| 1082289 | 46XX | West JACKSON BLVD #1A | CHICAGO ILLINOIS 60644 | 2016-09-16 00:00:00.000000 | Apartment |
+| ... | ... | ... | ... | ... | ... |
+
 
 #### q3: What outcomes have resulted for victims from lawsuits involving a “Home Invasion”?
 | outcome | number\_of\_occurences | percent\_of\_total |
