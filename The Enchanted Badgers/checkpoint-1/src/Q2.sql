@@ -18,10 +18,16 @@ sustained_by_category(category, frequency) as
     from categories
     where finding = 'SU'
     group by category
+),
+percentages_by_categories(category, percentage) as
+(
+    select a.category, (cast(coalesce(s.frequency, 0) as float)  / cast(a.frequency as float)) * 100
+    from allegations_by_category a
+    left join sustained_by_category s on a.category = s.category
+    where a.category is not null
 )
 
-select s.category, (cast(s.frequency as float)  / cast(a.frequency as float)) * 100 as percentage
-from sustained_by_category s
-left join allegations_by_category a on s.category = a.category
-where s.category is not null
-order by percentage;
+select *
+from percentages_by_categories
+where percentage = (select min(percentage) from percentages_by_categories) or
+      percentage = (select max(percentage) from percentages_by_categories);
