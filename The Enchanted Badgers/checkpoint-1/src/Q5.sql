@@ -21,7 +21,8 @@ unknown_other_by_year(year, frequency) as
     group by year
 )
 
-select t.year, cast(coalesce(u.frequency, 0)  as float)  / cast(t.frequency as float) as percentage
+select t.year, (cast(coalesce(u.frequency, 0)  as float)  / cast(t.frequency as float)) * 100 as percentage
 from total_by_year t
 left join unknown_other_by_year u on t.year = u.year
-order by t.year;
+where t.year is not null
+order by t.year desc;

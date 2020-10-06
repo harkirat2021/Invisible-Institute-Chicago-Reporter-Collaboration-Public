@@ -20,7 +20,8 @@ sustained_by_category(category, frequency) as
     group by category
 )
 
-select s.category, cast(s.frequency as float)  / cast(a.frequency as float) as percentage
+select s.category, (cast(s.frequency as float)  / cast(a.frequency as float)) * 100 as percentage
 from sustained_by_category s
 left join allegations_by_category a on s.category = a.category
+where s.category is not null
 order by percentage;
