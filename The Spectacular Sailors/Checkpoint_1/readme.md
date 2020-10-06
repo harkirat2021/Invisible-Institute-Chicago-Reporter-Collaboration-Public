@@ -20,3 +20,6 @@ For Checkpoint 1, our team explores the dataset with SQL in three general areas.
 3. From xxx.sql we add to our first set queries to add a geospatial component. 
 
 
+Key References:
+1. Storing graphs in the database: SQL meets social network: https://inviqa.com/blog/storing-graphs-database-sql-meets-social-network
+
