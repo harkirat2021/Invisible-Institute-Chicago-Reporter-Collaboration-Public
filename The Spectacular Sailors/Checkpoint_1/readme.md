@@ -17,7 +17,8 @@ For Checkpoint 1, our team explores the dataset with SQL in three general areas.
 
 2. From network_graphs.sql we explore how to create a network graph, in table format, on the cpdb dataset. When connected to the database, run the queries as prompted in the file's comments, in sequence, to see how we are thinking about tackling the technical challenge. At a high-leve, the premise is to take a list of officers that are known or suspected of being in the same crew, parse that list of officer_ids into a table of nodes, and then derive a table of edges that connect one node to another. If successful, we propose that this type of analysis may help identify how different crews are inter-related. 
 
-3. From xxx.sql we add to our first set queries to add a geospatial component. 
+3. From geolocationAndBeatIds.sql we add to our first set queries to add a geospatial component. The table from the query is ordered by beat_id and incident_date. In beat_id, we find a policing term which identifies the patrol area, and incident_date is the date when the incident happened. We can see from the table that although we cannot have the direct geographical location of the corresponding beat_id, we do have the street address for the later analysis for a geospatial representation. With the street address, we can even cluster our data of complaints to different zip codes. We may be able to use the incident_date, to quantify and group the number of complaints in each beat area per time period. However, as you may notice, there are some addresses with not NULL and no empty values, so it raises a future question about data cleaning, i.e. whether to drop the data or derive other data to fill.
+
 
 
 Key References:
