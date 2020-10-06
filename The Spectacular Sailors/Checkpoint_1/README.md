@@ -21,6 +21,6 @@ For Checkpoint 1, our team explores the dataset with SQL in three general areas.
 
 
 
-Key References:
+## Key References:
 1. Storing graphs in the database: SQL meets social network: https://inviqa.com/blog/storing-graphs-database-sql-meets-social-network
 
