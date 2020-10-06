@@ -19,7 +19,7 @@
 
 ### Question glossary and expected output
 
-#### q_1a: How many officers who were involved in a “Search Of Premise Without Warrant” are still on the force today, and what proportion of all officers involved in these illegal searches do they constitute?
+#### q1_a: How many officers who were involved in a “Search Of Premise Without Warrant” are still on the force today, and what proportion of all officers involved in these illegal searches do they constitute?
 ```
  count_active | count_all | percent_active 
 --------------+-----------+----------------
@@ -27,7 +27,7 @@
 (1 row)
 ```
 
-#### q_1b: Are there any officers who’ve been involved in more than one home invasion? What are their IDs and number of illegal searches? How many total repeaters are there?
+#### q1_b: Are there any officers who’ve been involved in more than one home invasion? What are their IDs and number of illegal searches? How many total repeaters are there?
 ```
  number_of_repeaters 
 ---------------------
@@ -79,9 +79,29 @@ home_invasion_allegation_count
 (... and more rows)
 ```
 
-#### **q_4a**: How many Wrong Address allegations have been made?
+#### q3: What outcomes have resulted for victims from lawsuits involving a “Home Invasion”?
+| outcome | number\_of\_occurences | percent\_of\_total |
+| :--- | :--- | :--- |
+| Charged | 123 | 45.72 |
+| No Outcome Recorded | 118 | 43.87 |
+| Hospitalized | 42 | 15.61 |
+| Detained | 20 | 7.43 |
+| Killed | 6 | 2.23 |
+
+
+#### **q4_a**: How many Wrong Address allegations have been made?
 4 rows
-#### **q_4b**: How many Wrong Address allegations led to settlements?
+#### **q4_b**: How many Wrong Address allegations led to settlements?
 1 row
-#### **q_4c**: Are officers involved in Wrong Address allegations linked to related settlements?
+#### **q4_c**: Are officers involved in Wrong Address allegations linked to related settlements?
 18 summaries
+
+
+#### q5: What outcomes have resulted for officers named in “Search Of Premise Without Warrant” allegations?
+| officer\_outcome | number\_of\_occurences | percent\_of\_total |
+| :--- | :--- | :--- |
+| No Penalty | 24593 | 99.58 |
+| Temporary Suspension | 51 | 0.21 |
+| Reprimand | 37 | 0.15 |
+| Resigned or Removed | 11 | 0.04 |
+| Violation Noted | 5 | 0.02 |
