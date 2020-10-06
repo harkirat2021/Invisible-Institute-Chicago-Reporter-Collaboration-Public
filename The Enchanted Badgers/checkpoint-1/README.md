@@ -75,27 +75,11 @@ Using the PSQL method for running the queries, execute the following command:
 This should result in a table that looks like the following. 
 
 ```
-            category            |     percentage     
---------------------------------+--------------------
- False Arrest                   | 0.4694323144104804
- Illegal Search                 | 0.5291005291005291
- First Amendment                | 1.2987012987012987
- Racial Profiling               | 1.7857142857142856
- Verbal Abuse                   |  2.392171076476984
- Use Of Force                   | 3.7152186750963976
- Domestic                       | 6.9320627113433755
- Traffic                        |  9.068717197607713
- Supervisory Responsibilities   |  9.676750932449234
- Lockup Procedures              | 12.288135593220339
- Operation/Personnel Violations | 14.708509877992752
- Criminal Misconduct            | 15.348837209302326
- Bribery / Official Corruption  | 18.305084745762713
- Conduct Unbecoming (Off-Duty)  | 27.407230640734998
- Unknown                        |              31.25
- Excessive Force                |  32.25806451612903
- Medical                        |                 40
- Drug / Alcohol Abuse           |  58.68924889543447
-(18 rows)
+       category       |    percentage     
+----------------------+-------------------
+ Money / Property     |                 0
+ Drug / Alcohol Abuse | 58.68924889543447
+(2 rows)
 ```
 
 ### Question 3: Which category of complaints are most and least likely to have severe consequences for the accused officers (more than a reprimand)?
