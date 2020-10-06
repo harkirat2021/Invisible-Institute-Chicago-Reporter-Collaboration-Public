@@ -9,6 +9,7 @@ tbd
 
 ### Question 2 Results
 
+```
             category            |     percentage     
 --------------------------------+--------------------
  False Arrest                   | 0.4694323144104804
@@ -30,9 +31,11 @@ tbd
  Medical                        |                 40
  Drug / Alcohol Abuse           |  58.68924889543447
 (18 rows)
+```
 
 ### Question 5 Results
 
+```
  year |     percentage      
 ------+---------------------
  2018 |  1.1029411764705883
@@ -54,5 +57,6 @@ tbd
  2002 | 0.24187975120939878
  2001 | 0.18585858585858586
  2000 |  0.3485928128364177
+ ```
  
  * Years prior to 2000 all have a percentage of zero and are truncated here for brevity.
