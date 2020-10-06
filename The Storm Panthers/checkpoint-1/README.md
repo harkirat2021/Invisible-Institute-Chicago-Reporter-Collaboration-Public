@@ -2,18 +2,20 @@
 
 ### How to run our queries
 
-* Clone our directory (in a location you will remember) using `git clone https://github.com/The-Storm-Panthers/checkpoint-1.git`
-* Open your terminal, navigate to the directory you just cloned. Then cd into the src folder
+* Clone our directory (in a location you will remember) using `git clone https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public.git`
+* Open your terminal, navigate to the directory you just cloned. Then cd into the src folder using `cd 'The Storm Panthers'/checkpoint-1/src`.
 * For **q1_a**, un the following command: `psql -f q1_a.sql -h cpdb.cgod7egsd6vr.us-east-2.rds.amazonaws.com -U cpdb-student -d cpdb -p 5432`
     - If you are prompted for a password, enter the following: **dataSci4lyf**
     - If typing the password in doesn't work, try to copy-and-paste it
 * Repeat the above steps for each of our questions, replacing **q1_a.sql** with the corresponding file name. Here is a complete list of our SQL files that need to be executed:
     - q_1a
     - q_1b
-    - q_1c
     - q_2
     - q_3
-    - q_4
+    - q_4a
+    - q_4b
+    - q_4c
+    - q_5
 
 ### Question glossary and expected output
 
