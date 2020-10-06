@@ -13,7 +13,7 @@ Summary of Checkpoint 1
 
 For Checkpoint 1, our team explores the dataset with SQL in three general areas. First, we craft a query that attempts to identify crew membership by combining data allegations and officers that are co-accused. Second, we learn technical aspects of how to create and represent network graphs in SQL tables and queries. Third, and lastly, we explore how to query and join tables with address or geospatial data to identify where crews operate.
 
-1. From xxxx.sql, we craft complex queries to identify crew membership.   What officers, by officer_id, are disciplined for the same complaint, where “same complaint” is defined as having the same beat, on the same incident date, and same CRID? Within similar criteria, what officers are not disciplined?
+1. From crew_membership_teams.sql, we craft complex queries to identify crew membership.   What officers, by officer_id, are disciplined for the same complaint, where “same complaint” is defined as having the same beat, on the same incident date, and same CRID? Within similar criteria, what officers are not disciplined?
 
 2. From network_graphs.sql we explore how to create a network graph, in table format, on the cpdb dataset. When connected to the database, run the queries as prompted in the file's comments, in sequence, to see how we are thinking about tackling the technical challenge. At a high-leve, the premise is to take a list of officers that are known or suspected of being in the same crew, parse that list of officer_ids into a table of nodes, and then derive a table of edges that connect one node to another. If successful, we propose that this type of analysis may help identify how different crews are inter-related. 
 
