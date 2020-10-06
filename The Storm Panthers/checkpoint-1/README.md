@@ -65,17 +65,18 @@
 | :--- |
 | 2840 |
 
+| allegation\_id | add1 | add2 | city | incident\_date | beat\_id | location |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 296668 |  |  |  | 2004-03-19 00:00:00+00 | 41 | Private Residence |
+| 301133 |  |  |  | 2004-10-06 00:00:00+00 | 152 | Private Residence |
+| 273077 |  |  |  | 2001-07-15 00:00:00+00 | 160 | Private Residence |
+| 292386 |  |  |  | 2003-09-06 00:00:00+00 | 223 | Private Residence |
+| 1059519 |  |  |  | 2013-01-15 00:00:00+00 | 133 | Private Residence |
+| 296584 |  |  |  | 2004-03-17 00:00:00+00 | 144 | Private Residence |
+| 271384 |  |  |  | 2001-05-10 00:00:00+00 | 59 | Private Residence |
+| ... | ... | ... | ... | ... | ... | ... |
 
-| allegation\_id | add1 | add2 | city | incident\_date | location |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1053874 |  |  |  | 2012-05-05 00:00:00.000000 | Private Residence |
-| 314810 |  |  |  | 2006-08-09 00:00:00.000000 | Private Residence |
-| 1082022 | 127XX | South SANGAMON ST | CHICAGO ILLINOIS 60643 | 2016-08-28 00:00:00.000000 | Residence |
-| 1082022 | 127XX | South SANGAMON ST | CHICAGO ILLINOIS 60643 | 2016-08-28 00:00:00.000000 | Residence |
-| 1082289 | 46XX | West JACKSON BLVD #1A | CHICAGO ILLINOIS 60644 | 2016-09-16 00:00:00.000000 | Apartment |
-| 1082289 | 46XX | West JACKSON BLVD #1A | CHICAGO ILLINOIS 60644 | 2016-09-16 00:00:00.000000 | Apartment |
-| 1082289 | 46XX | West JACKSON BLVD #1A | CHICAGO ILLINOIS 60644 | 2016-09-16 00:00:00.000000 | Apartment |
-| ... | ... | ... | ... | ... | ... |
+
 
 
 #### q3: What outcomes have resulted for victims from lawsuits involving a “Home Invasion”?
