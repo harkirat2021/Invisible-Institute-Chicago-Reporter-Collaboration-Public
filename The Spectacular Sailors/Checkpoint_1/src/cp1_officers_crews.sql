@@ -52,10 +52,16 @@ CREATE TEMP TABLE officers_crews_data AS (
         FROM officers_crews)
 );
 
-
+-- view initial table
 SELECT * FROM officers_crews_data;
 
--- drop where col starts with a "C"
+-- Exclude return where col starts with a "C"
 SELECT *
 FROM officers_crews_data
-WHERE crid like 'C%'
+WHERE crid not like 'C%'
+
+-- remove leading C in CRID with update and trim
+UPDATE officers_crews_data
+SET
+    crid = TRIM(LEADING 'C' FROM crid)
+
