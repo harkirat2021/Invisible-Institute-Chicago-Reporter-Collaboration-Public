@@ -97,22 +97,15 @@ DROP TABLE IF EXISTS complaints_discipline;
 CREATE TEMP TABLE complaints_discipline AS(
 SELECT "oct".id, "oct".num_officer_complaints,
        COALESCE("odt".num_disciplinary_actions, 0) AS num_disciplinary_actions,
-       CAST("odt".num_disciplinary_actions AS FLOAT) / CAST("oct".num_officer_complaints AS FLOAT) AS discipline_ratio
+       COALESCE(CAST("oct".num_officer_complaints AS FLOAT) / CAST("odt".num_disciplinary_actions AS FLOAT), 0) AS discipline_ratio
 FROM officer_complaints_count "oct"
 LEFT JOIN officer_disciplined_true odt
     on "oct".id = odt.id);
 
--- Update table ratios: fill null with 0
+-- Return negative value counts for officers with zero disciplinary actions
 UPDATE complaints_discipline
-SET discipline_ratio = 0
-WHERE discipline_ratio IS NULL
+SET discipline_ratio = -1 * num_officer_complaints
+WHERE num_disciplinary_actions = 0;
 
 -- View discipline_ratio
 SELECT * FROM complaints_discipline
-
-
-
-
-
-
-
