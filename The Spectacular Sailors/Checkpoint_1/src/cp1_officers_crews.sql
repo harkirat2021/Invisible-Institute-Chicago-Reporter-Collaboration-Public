@@ -67,6 +67,13 @@ FROM officers_crews_data
 GROUP BY id, crid
 HAVING COUNT(*) > 1;
 
+
+CREATE TEMP TABLE officer_complaints_count AS(
+    SELECT id, COUNT(*)
+    FROM officers_crews_data
+    GROUP BY id);
+SELECT * FROM officer_complaints_count;
+
 -- Find disciplined officers records
 CREATE  TEMP TABLE officer_displined_true AS(
     SELECT id, COUNT(*)
