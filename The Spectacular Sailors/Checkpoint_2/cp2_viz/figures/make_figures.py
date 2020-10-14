@@ -35,7 +35,7 @@ class PlotData:
     def plot_officers(self):
         df = self.datafile
         print('officers data')
-        print(len(df))
+        print(df)
 
 
 

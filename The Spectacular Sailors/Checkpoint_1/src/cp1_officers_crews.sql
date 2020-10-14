@@ -18,6 +18,7 @@ CREATE TEMP TABLE officers_crews AS (
         WHERE detected_crew = 'Yes')
 );
 
+SELECT * FROM officers_crews
 -- Return allegation and officer data for those identified as crew members
 
 DROP TABLE IF EXISTS officers_crews_data
@@ -36,13 +37,16 @@ CREATE TEMP TABLE officers_crews_data AS (
            "da".beat_id,
            "da".location,
            "doa".allegation_category_id,
-           "doa".disciplined
+           "doa".disciplined,
+            "oc".crew_id
 
     FROM data_officer "do"
              LEFT JOIN data_officerallegation "doa"
                        on "do".id = "doa".officer_id
              LEFT JOIN data_allegation "da"
                        on "doa".allegation_id = "da".crid
+             LEFT JOIN officers_crews oc
+                       on doa.officer_id = oc.officer_id
     WHERE "do".id in (
         SELECT officers_crews.id
         FROM officers_crews)

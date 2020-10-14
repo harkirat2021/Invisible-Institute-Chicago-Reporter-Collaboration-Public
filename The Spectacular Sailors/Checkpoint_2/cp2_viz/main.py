@@ -19,8 +19,10 @@ if __name__ == '__main__':
     """
     Plot for crews
     """
+
+    ## plot for officers
     csv_reader = get_data.CsvReader('data_crew_cp1.csv')
-    df_officers = csv_reader.to_dataframe()
+    df_officers = csv_reader.to_dataframe(index_col=0)
 
     ## send to clean_data when ready
     # remove leading 'C' from CRID field.
@@ -29,6 +31,8 @@ if __name__ == '__main__':
             'civilian_allegation_percentile', 'last_unit_id', 'crid']
     df_officers.drop_duplicates(subset=cols, keep='last', inplace=True)
 
+    cols = ['crid', 'disciplined']
+    df_officers.dropna(subset=cols, axis=0, inplace=True)
     df_officers.to_csv('test.csv')
     ## cleaning here ^^
 
