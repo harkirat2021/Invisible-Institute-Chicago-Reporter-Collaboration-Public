@@ -55,7 +55,8 @@ CREATE TEMP TABLE officers_crews_data AS (
            "da".beat_id,
            "da".location,
            "doa".allegation_category_id,
-           "doa".disciplined
+           "doa".disciplined,
+           "da".coaccused_count
 
     FROM data_officer "do"
              LEFT JOIN data_officerallegation "doa"
@@ -87,10 +88,10 @@ HAVING COUNT(*) > 1;
 -- Return a count of disciplinary actions for each officer
 DROP TABLE IF EXISTS officer_disciplined_count;
 CREATE TEMP TABLE officer_disciplined_count AS(
-    SELECT officer_id, crew_id, detected_crew, COUNT(*) AS num_disciplinary_actions
+    SELECT officer_id, crew_id, detected_crew, coaccused_count, COUNT(*) AS num_disciplinary_actions
     FROM officers_crews_data
     WHERE disciplined = 'true'
-    GROUP BY officer_id, crew_id, detected_crew
+    GROUP BY officer_id, crew_id, detected_crew, coaccused_count
 );
 
 -- View counts where officers were disciplined for an allegation
@@ -99,9 +100,9 @@ SELECT * FROM officer_disciplined_count;
 -- Return a count of complaints for each officer
 DROP TABLE IF EXISTS officer_complaints_count;
 CREATE TEMP TABLE officer_complaints_count AS(
-    SELECT officer_id, crew_id, detected_crew, COUNT(*) AS num_officer_complaints
+    SELECT officer_id, crew_id, detected_crew,coaccused_count, COUNT(*) AS num_officer_complaints
     FROM officers_crews_data
-    GROUP BY officer_id, crew_id, detected_crew);
+    GROUP BY officer_id, crew_id, detected_crew, coaccused_count);
 
 -- View counts of officer complaints
 SELECT * FROM officer_complaints_count WHERE crew_id = 108;
@@ -118,6 +119,7 @@ SELECT occ.officer_id,
 FROM officer_complaints_count occ
 LEFT JOIN officer_disciplined_count odc
     on odc.officer_id = occ.officer_id);
+LEFT JOIN officer_discipline_coutn
 
 SELECT * FROM complaints_discipline
 
