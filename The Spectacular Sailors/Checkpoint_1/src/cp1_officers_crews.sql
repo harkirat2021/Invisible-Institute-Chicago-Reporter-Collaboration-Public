@@ -94,7 +94,7 @@ CREATE TEMP TABLE officer_disciplined_count AS(
 );
 
 -- View counts where officers were disciplined for an allegation
-SELECT * FROM officer_disciplined_count;
+SELECT * FROM officer_disciplined_count WHERE crew_id =108;
 
 -- Return a count of complaints for each officer
 DROP TABLE IF EXISTS officer_complaints_count;
@@ -110,13 +110,15 @@ SELECT * FROM officer_complaints_count WHERE crew_id = 108;
 -- FIXME: The Join returns officers without crew_id; doublecheck queries
 DROP TABLE IF EXISTS complaints_discipline;
 CREATE TEMP TABLE complaints_discipline AS(
-SELECT occ.officer_id,odc.crew_id,odc.detected_crew,
+SELECT occ.officer_id,
+       odc.crew_id,
+       odc.detected_crew,
        occ.num_officer_complaints,
        COALESCE(odc.num_disciplinary_actions, 0) AS num_disciplinary_actions,
        COALESCE(CAST(occ.num_officer_complaints AS FLOAT) / CAST(odc.num_disciplinary_actions AS FLOAT), 0) AS discipline_ratio
 FROM officer_complaints_count occ
 LEFT JOIN officer_disciplined_count odc
-    on occ.officer_id = odc.officer_id);
+    on odc.officer_id = occ.officer_id);
 
 SELECT * FROM complaints_discipline WHERE crew_id = '108';
 
