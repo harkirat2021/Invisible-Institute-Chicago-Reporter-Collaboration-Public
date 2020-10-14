@@ -8,8 +8,6 @@ class PlotData:
     def to_plot(self):
         df = self.datafile
 
-        # fig = go.Scatter(df.query('detected_crew==Yes'), x='years_on_force', y='index_value', size='index_value')
-
         data_plot = go.Scatter(
             x=df.index_value,
             y=df.years_on_force,
