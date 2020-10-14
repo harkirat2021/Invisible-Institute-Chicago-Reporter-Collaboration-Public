@@ -70,7 +70,7 @@ CREATE TEMP TABLE officers_crews_data AS (
 );
 
 -- view officers_crews_data table
-SELECT * FROM officers_crews_data;
+SELECT * FROM officers_crews_data WHERE crew_id = '108';
 
 -- remove leading C in CRID with update and trim
 UPDATE officers_crews_data
@@ -85,8 +85,8 @@ GROUP BY officer_id, crid
 HAVING COUNT(*) > 1;
 
 -- Return a count of disciplinary actions for each officer
-DROP TABLE IF EXISTS officer_disciplined;
-CREATE TEMP TABLE officer_disciplined AS(
+DROP TABLE IF EXISTS officer_disciplined_count;
+CREATE TEMP TABLE officer_disciplined_count AS(
     SELECT officer_id, crew_id, detected_crew, COUNT(*) AS num_disciplinary_actions
     FROM officers_crews_data
     WHERE disciplined = 'true'
@@ -94,31 +94,31 @@ CREATE TEMP TABLE officer_disciplined AS(
 );
 
 -- View counts where officers were disciplined for an allegation
-SELECT * FROM officer_disciplined
+SELECT * FROM officer_disciplined_count;
 
 -- Return a count of complaints for each officer
 DROP TABLE IF EXISTS officer_complaints_count;
 CREATE TEMP TABLE officer_complaints_count AS(
-    SELECT officer_id, COUNT(*) AS num_officer_complaints
+    SELECT officer_id, crew_id, detected_crew,COUNT(*) AS num_officer_complaints
     FROM officers_crews_data
-    GROUP BY officer_id);
+    GROUP BY officer_id, crew_id, detected_crew);
 
 -- View counts of officer complaints
-SELECT * FROM officer_complaints_count;
+SELECT * FROM officer_complaints_count WHERE crew_id = 108;
 
 -- Return a combined count of complaints and disciplinary for each officer
 -- FIXME: The Join returns officers without crew_id; doublecheck queries
 DROP TABLE IF EXISTS complaints_discipline;
 CREATE TEMP TABLE complaints_discipline AS(
-SELECT "oct".officer_id, "od".crew_id, "od".detected_crew,
-       "oct".num_officer_complaints,
-       COALESCE("od".num_disciplinary_actions, 0) AS num_disciplinary_actions,
-       COALESCE(CAST("oct".num_officer_complaints AS FLOAT) / CAST("od".num_disciplinary_actions AS FLOAT), 0) AS discipline_ratio
-FROM officer_complaints_count "oct"
-LEFT JOIN officer_disciplined "od"
-    on "oct".officer_id = "od".officer_id);
+SELECT occ.officer_id,odc.crew_id,odc.detected_crew,
+       occ.num_officer_complaints,
+       COALESCE(odc.num_disciplinary_actions, 0) AS num_disciplinary_actions,
+       COALESCE(CAST(occ.num_officer_complaints AS FLOAT) / CAST(odc.num_disciplinary_actions AS FLOAT), 0) AS discipline_ratio
+FROM officer_complaints_count occ
+LEFT JOIN officer_disciplined_count odc
+    on occ.officer_id = odc.officer_id);
 
-SELECT * FROM complaints_discipline;
+SELECT * FROM complaints_discipline WHERE crew_id = '108';
 
 -- Return negative value counts for officers with zero disciplinary actions
 UPDATE complaints_discipline
@@ -132,7 +132,6 @@ SELECT * FROM complaints_discipline
 ORDER BY discipline_ratio ASC;
 
 -- Question 4: Provide descriptive statistics about officer discipline ratios
--- FIXME: Min is not returning the lowest negative value for some reason; stopping at a min of 1
 SELECT AVG(CAST(discipline_ratio AS FLOAT)) AS average_ratio,
        MIN(discipline_ratio) AS min_ratio,
        MAX(discipline_ratio) AS max_ratio,
