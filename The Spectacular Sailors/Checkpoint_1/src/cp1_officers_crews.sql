@@ -55,13 +55,16 @@ CREATE TEMP TABLE officers_crews_data AS (
 -- view initial table
 SELECT * FROM officers_crews_data;
 
--- Exclude return where col starts with a "C"
-SELECT *
-FROM officers_crews_data
-WHERE crid not like 'C%'
-
 -- remove leading C in CRID with update and trim
 UPDATE officers_crews_data
 SET
     crid = TRIM(LEADING 'C' FROM crid)
+
+-- Find duplicate records
+-- FIXME: Delete the duplicate row in Python
+SELECT id, crid, COUNT(*)
+FROM officers_crews_data
+GROUP BY id, crid
+HAVING COUNT(*) > 1;
+
 

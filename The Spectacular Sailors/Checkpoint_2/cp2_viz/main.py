@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     ## send to clean_data when ready
     # remove leading 'C' from CRID field.
-    df_officers.crid = df_officers['crid'].str.replace('C','')
+    # df_officers.crid = df_officers['crid'].str.replace('C','')
     cols = ['id', 'gender', 'race',	'appointed_date', 'active',	'complaint_percentile',
             'civilian_allegation_percentile', 'last_unit_id', 'crid']
     # df_officers.drop_duplicates(subset=cols, keep='last', inplace=True)
