@@ -108,4 +108,5 @@ SET discipline_ratio = -1 * num_officer_complaints
 WHERE num_disciplinary_actions = 0;
 
 -- View discipline_ratio
+-- Example: Officer was disciplined once every 16.75 accusations or never disciplined in 98 recorded accusations
 SELECT * FROM complaints_discipline
