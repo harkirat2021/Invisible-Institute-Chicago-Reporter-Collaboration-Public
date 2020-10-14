@@ -67,4 +67,17 @@ FROM officers_crews_data
 GROUP BY id, crid
 HAVING COUNT(*) > 1;
 
+-- Find disciplined officers records
+CREATE  TEMP TABLE officer_displined_true AS(
+    SELECT id, COUNT(*)
+    FROM officers_crews_data
+    WHERE disciplined = 'True'
+    GROUP BY id
+);
+
+
+SELECT *
+FROM officer_complaints_count
+LEFT JOIN officer_displined_true odt
+    on officer_complaints_count.id = odt.id;
 
