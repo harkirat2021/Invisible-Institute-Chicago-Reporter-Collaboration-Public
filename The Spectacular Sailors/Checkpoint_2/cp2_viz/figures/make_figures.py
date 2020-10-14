@@ -5,7 +5,7 @@ class PlotData:
     def __init__(self, datafile):
         self.datafile = datafile
 
-    def to_plot(self):
+    def plot_crews(self):
         df = self.datafile
 
         data_plot = go.Scatter(
@@ -32,11 +32,11 @@ class PlotData:
 
         fig.show()
 
+    def plot_officers(self):
+        df = self.datafile
+        print('officers data')
+        print(len(df))
 
-
-        # df.community_id = 'Community ID' + df['community_id'].astype(str)
-
-        # print(df.community_id)
 
 
 
