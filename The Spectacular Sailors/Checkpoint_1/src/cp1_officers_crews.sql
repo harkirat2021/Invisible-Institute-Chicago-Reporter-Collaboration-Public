@@ -45,7 +45,7 @@ CREATE TEMP TABLE officers_crews_data AS (
                        on "do".id = "doa".officer_id
              LEFT JOIN data_allegation "da"
                        on "doa".allegation_id = "da".crid
-             LEFT JOIN officers_crews "oc"
+             RIGHT JOIN officers_crews "oc"
                        on "doa".officer_id = "oc".officer_id
     WHERE "do".id in (
         SELECT officers_crews.id
