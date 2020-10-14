@@ -107,6 +107,7 @@ CREATE TEMP TABLE officer_complaints_count AS(
 SELECT * FROM officer_complaints_count;
 
 -- Return a combined count of complaints and disciplinary for each officer
+-- FIXME: The Join returns officers without crew_id; doublecheck queries
 DROP TABLE IF EXISTS complaints_discipline;
 CREATE TEMP TABLE complaints_discipline AS(
 SELECT "oct".officer_id, "od".crew_id, "od".detected_crew,
