@@ -1,6 +1,7 @@
 -- Checkpoint 1: Relational Analytics - Spectacular Sailors
 
--- Return a count of communities that are identified as crews
+-- Question 1: Identify and count the officers that are in and not in crews
+-- Return a count of officers that are identified as crews
 SELECT COUNT (DISTINCT id)
 FROM data_officercrew
 WHERE crew_id in (
@@ -9,6 +10,16 @@ WHERE crew_id in (
     WHERE detected_crew = 'Yes'
     );
 
+-- Return a count of officers that are NOT identified as crews
+SELECT COUNT (DISTINCT id)
+FROM data_officercrew
+WHERE crew_id in (
+    SELECT community_id
+    FROM data_crew
+    WHERE detected_crew = 'No'
+    );
+
+-- Working table to set up analysis for officers, accusations, and crews
 -- Return a table of officers with crew_id and whether they are a detected crew
 DROP TABLE IF EXISTS officers_crews;
 CREATE TEMP TABLE officers_crews AS (
@@ -23,7 +34,7 @@ CREATE TEMP TABLE officers_crews AS (
 );
 
 -- View officers_crews
-SELECT * FROM officers_crews
+SELECT * FROM officers_crews;
 
 -- Return allegation and officer data for those identified as crew members
 DROP TABLE IF EXISTS officers_crews_data
@@ -78,6 +89,7 @@ DROP TABLE IF EXISTS officer_disciplined;
 CREATE TEMP TABLE officer_disciplined AS(
     SELECT officer_id, crew_id, detected_crew, COUNT(*) AS num_disciplinary_actions
     FROM officers_crews_data
+    WHERE disciplined = 'true'
     GROUP BY officer_id, crew_id, detected_crew
 );
 
@@ -105,12 +117,31 @@ FROM officer_complaints_count "oct"
 LEFT JOIN officer_disciplined "od"
     on "oct".officer_id = "od".officer_id);
 
+SELECT * FROM complaints_discipline;
+
 -- Return negative value counts for officers with zero disciplinary actions
 UPDATE complaints_discipline
 SET discipline_ratio = -1 * num_officer_complaints
 WHERE num_disciplinary_actions = 0;
 
--- View discipline_ratio
+-- Question 2 and 3: How often accused v disciplined and what is the ratio of action?
 -- Example: Officer was disciplined once every 16.75 accusations or,
 -- where negative, never disciplined in 98 recorded accusations
 SELECT * FROM complaints_discipline
+ORDER BY discipline_ratio ASC;
+
+-- Question 4: Provide descriptive statistics about officer discipline ratios
+-- FIXME: Min is not returning the lowest negative value for some reason; stopping at a min of 1
+SELECT AVG(CAST(discipline_ratio AS FLOAT)) AS average_ratio,
+       MIN(discipline_ratio) AS min_ratio,
+       MAX(discipline_ratio) AS max_ratio,
+       stddev(CAST(discipline_ratio AS FLOAT)) AS stddev_ratio
+FROM complaints_discipline
+WHERE detected_crew = 'Yes';
+
+SELECT AVG(CAST(discipline_ratio AS FLOAT)) AS average_ratio,
+       MIN(discipline_ratio) AS min_ratio,
+       MAX(discipline_ratio) AS max_ratio,
+       stddev(CAST(discipline_ratio AS FLOAT)) AS stddev_ratio
+FROM complaints_discipline
+WHERE detected_crew = 'No';
