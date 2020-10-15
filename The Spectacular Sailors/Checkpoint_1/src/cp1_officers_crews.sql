@@ -74,9 +74,9 @@ CREATE TEMP TABLE officers_crews_data AS (
 -- view officers_crews_data table
 SELECT * FROM officers_crews_data WHERE crew_id = '108';
 
---DROP TABLE IF EXISTS officers_summary
---CREATE TEMP TABLE officers_summary AS (
-SELECT officer_id, detected_crew
+DROP TABLE IF EXISTS officers_summary
+CREATE TEMP TABLE officers_summary AS (
+SELECT officer_id, detected_crew, crid
      , sum(case when disciplined = 'false' then 0
                 else  1 end) as displine_count
      , sum(case when disciplined = 'false' or disciplined is null then 1
@@ -87,9 +87,8 @@ SELECT officer_id, detected_crew
      , sum(case when disciplined = 'true' then Coaccused_Count end) as Total_CoAccusals_disciplined
      , sum(Coaccused_Count) as Total_CoAccusals
 FROM officers_crews_data
-WHERE officer_id in ('18719', '11713')
-group by 1,2
---);
+--WHERE officer_id in ('18719', '11713')
+group by 1,2,3);
 
 select * from officers_crews_data
 
