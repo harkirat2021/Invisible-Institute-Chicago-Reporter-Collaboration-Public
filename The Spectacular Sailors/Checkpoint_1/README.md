@@ -1,6 +1,6 @@
 By: Pengyi Shi, Milan McGraw, and Justin Chae
 
-Project Title: Network Graphs of Arresting Officers 
+Project Title: Modeling Risk of Police Misconduct
 
 
 # THEME
