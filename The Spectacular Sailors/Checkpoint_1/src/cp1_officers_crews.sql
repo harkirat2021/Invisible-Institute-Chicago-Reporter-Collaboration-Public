@@ -93,9 +93,8 @@ select * from officers_crews_data
 
 select*
 , none_displine_count/Total_Allegations_Discipline as rt_disciplined
-, Total_CoAccusals_Non_Discipline/Total_CoAccusals
+, Total_CoAccusals_Non_Discipline/Total_CoAccusals as coaccusals_vstotalaccusals
 from officers_summary
-
 
 
 -- remove leading C in CRID with update and trim
