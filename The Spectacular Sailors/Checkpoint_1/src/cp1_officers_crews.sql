@@ -87,7 +87,6 @@ SELECT officer_id, detected_crew, crid
      , sum(case when disciplined = 'true' then Coaccused_Count end) as Total_CoAccusals_disciplined
      , sum(Coaccused_Count) as Total_CoAccusals
 FROM officers_crews_data
-WHERE officer_id in ('18719')
 group by 1,2,3);
 
 select * from officers_crews_data
