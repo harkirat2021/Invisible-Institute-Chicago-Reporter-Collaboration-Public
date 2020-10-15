@@ -87,7 +87,7 @@ SELECT officer_id, detected_crew, crid
      , sum(case when disciplined = 'true' then Coaccused_Count end) as Total_CoAccusals_disciplined
      , sum(Coaccused_Count) as Total_CoAccusals
 FROM officers_crews_data
---WHERE officer_id in ('18719', '11713')
+WHERE officer_id in ('18719')
 group by 1,2,3);
 
 select * from officers_crews_data
@@ -96,20 +96,7 @@ select*
 , none_displine_count/Total_Allegations_Discipline as rt_disciplined
 , Total_CoAccusals_Non_Discipline/Total_CoAccusals
 from officers_summary
-WHERE officer_id in ('18719')
 
-select *
-    ,none_displine_count/Total_Allegations_Discipline
-from officers_summary
-
-
-select * from data_officer
-    where id = '18719'
-
-select * from data_allegation
-        where officer_id = '18719'
-
-SELECT * FROM officers_crews_data WHERE officer_id = '18719'
 
 
 -- remove leading C in CRID with update and trim
