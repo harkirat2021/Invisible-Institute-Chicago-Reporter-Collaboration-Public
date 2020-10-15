@@ -56,7 +56,7 @@ CREATE TEMP TABLE officers_crews_data AS (
            "da".location,
            "doa".allegation_category_id,
            "doa".disciplined,
-           "da".coaccused_count
+           sum ("da".coaccused_count) as Coaccused_Count
 
     FROM data_officer "do"
              LEFT JOIN data_officerallegation "doa"
@@ -68,10 +68,50 @@ CREATE TEMP TABLE officers_crews_data AS (
     WHERE "do".id in (
         SELECT officers_crews.officer_id
         FROM officers_crews)
+    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
 );
 
 -- view officers_crews_data table
 SELECT * FROM officers_crews_data WHERE crew_id = '108';
+
+--DROP TABLE IF EXISTS officers_summary
+--CREATE TEMP TABLE officers_summary AS (
+SELECT officer_id, detected_crew
+     , sum(case when disciplined = 'false' then 0
+                else  1 end) as displine_count
+     , sum(case when disciplined = 'false' or disciplined is null then 1
+                else 0 end) as none_displine_count
+     , sum(case when disciplined = 'false' then 0 when disciplined = 'true' then 1 end)
+     + sum(case when disciplined = 'false' or disciplined is null then 1 else 0 end) as Total_Allegations_Discipline
+     , sum(case when disciplined = 'false' or disciplined is null then Coaccused_Count end) as Total_CoAccusals_Non_Discipline
+     , sum(case when disciplined = 'true' then Coaccused_Count end) as Total_CoAccusals_disciplined
+     , sum(Coaccused_Count) as Total_CoAccusals
+FROM officers_crews_data
+WHERE officer_id in ('18719', '11713')
+group by 1,2
+--);
+
+select * from officers_crews_data
+
+select*
+, none_displine_count/Total_Allegations_Discipline as rt_disciplined
+, Total_CoAccusals_Non_Discipline/Total_CoAccusals
+from officers_summary
+WHERE officer_id in ('18719')
+
+select *
+    ,none_displine_count/Total_Allegations_Discipline
+from officers_summary
+
+
+select * from data_officer
+    where id = '18719'
+
+select * from data_allegation
+        where officer_id = '18719'
+
+SELECT * FROM officers_crews_data WHERE officer_id = '18719'
+
 
 -- remove leading C in CRID with update and trim
 UPDATE officers_crews_data
