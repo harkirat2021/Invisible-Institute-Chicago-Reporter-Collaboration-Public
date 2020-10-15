@@ -19,7 +19,7 @@ WHERE crew_id in (
     WHERE detected_crew = 'No'
     );
 
--- Working table to set up analysis for officers, accusations, and crews
+-- Create working tables to set up analysis for officers, accusations, and crews
 -- Return a table of officers with crew_id and whether they are a detected crew
 DROP TABLE IF EXISTS officers_crews;
 CREATE TEMP TABLE officers_crews AS (
@@ -37,7 +37,7 @@ CREATE TEMP TABLE officers_crews AS (
 SELECT * FROM officers_crews;
 
 -- Return allegation and officer data for those identified as crew members
-DROP TABLE IF EXISTS officers_crews_data
+DROP TABLE IF EXISTS officers_crews_data;
 CREATE TEMP TABLE officers_crews_data AS (
     SELECT "oc".officer_id,
            "oc".crew_id,
@@ -71,10 +71,12 @@ CREATE TEMP TABLE officers_crews_data AS (
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
 );
 
--- view officers_crews_data table
-SELECT * FROM officers_crews_data WHERE crew_id = '108';
+-- View officers_crews_data table
+SELECT * FROM officers_crews_data;
 
-DROP TABLE IF EXISTS officers_summary
+-- Generate summary statistics for Question 2
+-- Accused/Co-Accused - Disciplined Rates for Officers in/not in crews
+DROP TABLE IF EXISTS officers_summary;
 CREATE TEMP TABLE officers_summary AS (
 SELECT officer_id, detected_crew, crid
      , sum(case when disciplined = 'false' then 0
@@ -87,16 +89,18 @@ SELECT officer_id, detected_crew, crid
      , sum(case when disciplined = 'true' then Coaccused_Count end) as Total_CoAccusals_disciplined
      , sum(Coaccused_Count) as Total_CoAccusals
 FROM officers_crews_data
-group by 1,2,3);
+GROUP BY 1,2,3);
 
-select * from officers_crews_data
+-- View results of query from officers_summary
+SELECT * FROM officers_summary;
 
-select*
-, none_displine_count/Total_Allegations_Discipline as rt_disciplined
-, Total_CoAccusals_Non_Discipline/Total_CoAccusals as coaccusals_vstotalaccusals
-from officers_summary
+-- Return a table of counts that we can produce summary statistics from
+SELECT *
+, CAST(none_displine_count AS FLOAT)/ CAST(Total_Allegations_Discipline AS FLOAT) as rt_disciplined
+, CAST(Total_CoAccusals_Non_Discipline AS FLOAT)/CAST(Total_CoAccusals AS FLOAT) as coaccusals_vstotalaccusals
+FROM officers_summary
 
-
+-- TODO: Address issues with CRID values in data cleaning steps
 -- remove leading C in CRID with update and trim
 UPDATE officers_crews_data
 SET
@@ -129,7 +133,7 @@ CREATE TEMP TABLE officer_complaints_count AS(
     GROUP BY officer_id, crew_id, detected_crew, coaccused_count);
 
 -- View counts of officer complaints
-SELECT * FROM officer_complaints_count WHERE crew_id = 108;
+SELECT * FROM officer_complaints_count;
 
 -- Return a combined count of complaints and disciplinary for each officer
 DROP TABLE IF EXISTS complaints_discipline;
@@ -143,9 +147,8 @@ SELECT occ.officer_id,
 FROM officer_complaints_count occ
 LEFT JOIN officer_disciplined_count odc
     on odc.officer_id = occ.officer_id);
-LEFT JOIN officer_discipline_coutn
 
-SELECT * FROM complaints_discipline
+SELECT * FROM complaints_discipline;
 
 -- Return negative value counts for officers with zero disciplinary actions
 UPDATE complaints_discipline
