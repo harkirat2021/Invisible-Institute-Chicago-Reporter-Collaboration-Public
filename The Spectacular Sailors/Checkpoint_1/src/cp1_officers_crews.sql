@@ -91,7 +91,7 @@ SELECT officer_id, detected_crew, crid
 FROM officers_crews_data
 GROUP BY 1,2,3);
 
--- View results of query from officers_summary
+-- Summary_statistics
 SELECT * FROM officers_summary;
 
 -- Return a table of counts that we can produce summary statistics from
