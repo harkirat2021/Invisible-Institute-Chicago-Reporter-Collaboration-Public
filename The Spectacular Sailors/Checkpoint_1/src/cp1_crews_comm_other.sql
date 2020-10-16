@@ -50,14 +50,10 @@ WHERE oc.officer_id is NULL;
 SELECT COUNT(DISTINCT id)
 FROM data_officer;
 
---  TODO:   Update officers_cohorts with cohorts col, where
+--  Working Notes
 --      when detected_crew = true, cohorts is 1 (crew),
 --      when detected_crew = false, cohorts is 2 (community),
 --      when condition is all other officers, cohorts is 3 (community),
---  TODO:  Reshape cols from data_officer into officers_cohorts to match
-
-SELECT * FROM working_cohort_0;
-SELECT * FROM data_officer LIMIT 10;
 
 DROP TABLE IF EXISTS working_cohort_3;
 CREATE TEMP TABLE working_cohort_3 AS (
@@ -98,10 +94,12 @@ ALTER TABLE officers_cohorts
 -- When community_id is 0, then not in a community
 -- When cohort = 1, then crew, when cohort = 2, then community, when cohort = 3, then all others
 
-SELECT * FROM officers_cohorts;
-
 -- Verify Counts
-SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 3
+SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 1;
+SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 2;
+SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 3;
+
+SELECT * FROM officers_cohorts;
 
 
 

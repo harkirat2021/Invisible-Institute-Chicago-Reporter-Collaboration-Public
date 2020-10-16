@@ -34,7 +34,7 @@ CREATE TEMP TABLE officers_crews AS (
 );
 
 -- View officers_crews
-SELECT * FROM officers_crews;
+SELECT * FROM data_officercrew;
 
 -- Return allegation and officer data for those identified as crew members
 DROP TABLE IF EXISTS officers_crews_data;
