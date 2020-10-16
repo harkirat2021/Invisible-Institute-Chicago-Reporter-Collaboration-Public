@@ -5,8 +5,9 @@
 --              Counts of accusals, co-accusals, and disciplinary actions
 --              Award payouts
 
--- Step A: Create a working table for cohorts
+-- Step A: Count Cohort populations (1) Crews Only, (2) Communities Only, (3) All others
 
+-- Create a base table of officers in crews and in communities
 DROP TABLE IF EXISTS officers_cohorts;
 CREATE TEMP TABLE officers_cohorts AS (
     SELECT doc.officer_id, doc.crew_id, doc.officer_name, dc.detected_crew
@@ -18,6 +19,7 @@ CREATE TEMP TABLE officers_cohorts AS (
         FROM data_crew
         )
 );
+
 -- Cohort 1 Crews: ~1,156
 SELECT COUNT(DISTINCT officer_id)
 FROM officers_cohorts
