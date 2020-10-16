@@ -104,8 +104,45 @@ SELECT * FROM officers_cohorts;
 
 -- Q1 Part B: Join accusals and disciplinary data to officers_cohorts
 
--- TODO: @Milan or @Pengyi
 
+-- Return allegation and officer data for all officers based on cohorts
+DROP TABLE IF EXISTS officers_cohorts_data;
+CREATE TEMP TABLE officers_cohorts_data AS (
+    SELECT "oc".officer_id,
+           "oc".crew_id,
+           "oc".community_id,
+           "oc".cohort,
+           "do".gender,
+           "do".race,
+           "do".appointed_date,
+           "do".active,
+           "do".complaint_percentile,
+           "do".civilian_allegation_percentile,
+           "do".last_unit_id,
+           "da".crid,
+           "da".incident_date,
+           "da".point,
+           "da".beat_id,
+           "da".location,
+           "doa".allegation_category_id,
+           "doa".disciplined,
+           sum ("da".coaccused_count) as Coaccused_Count
+
+    FROM data_officer "do"
+             LEFT JOIN data_officerallegation "doa"
+                       on "do".id = "doa".officer_id
+             LEFT JOIN data_allegation "da"
+                       on "doa".allegation_id = "da".crid
+             RIGHT JOIN officers_cohorts "oc"
+                       on "doa".officer_id = "oc".officer_id
+    WHERE "do".id in (
+        SELECT officers_cohorts.officer_id
+        FROM officers_cohorts)
+    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18
+);
+
+
+SELECT * FROM officers_cohorts_data;
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
 -- Where the average is given by the sum of co-accusals in a Cohort divided by the total number of
