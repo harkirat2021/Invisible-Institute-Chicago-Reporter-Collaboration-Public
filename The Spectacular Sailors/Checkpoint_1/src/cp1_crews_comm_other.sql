@@ -8,8 +8,8 @@
 -- Step A: Count Cohort populations (1) Crews Only, (2) Communities Only, (3) All others
 
 -- Create a base table of officers in crews and in communities
-DROP TABLE IF EXISTS officers_cohorts;
-CREATE TEMP TABLE officers_cohorts AS (
+DROP TABLE IF EXISTS working_cohorts;
+CREATE TEMP TABLE working_cohorts AS (
     SELECT doc.officer_id, doc.crew_id, doc.officer_name, dc.detected_crew
     FROM data_officercrew doc
     LEFT JOIN data_crew dc
@@ -22,25 +22,25 @@ CREATE TEMP TABLE officers_cohorts AS (
 
 -- Cohort 1 Crews: ~1,156
 SELECT COUNT(DISTINCT officer_id)
-FROM officers_cohorts
+FROM working_cohorts
 WHERE detected_crew = 'true';
 
 -- Cohort 2 Community and not Crew: ~10,071
 SELECT COUNT(DISTINCT officer_id)
-FROM officers_cohorts
+FROM working_cohorts
 WHERE detected_crew = 'false';
 
 -- Find all officers who are not in crews or communities (Cohort 3)
 SELECT "do".id, "do".first_name, "do".last_name
 FROM data_officer "do"
-LEFT JOIN officers_cohorts oc ON
+LEFT JOIN working_cohorts oc ON
     "do".id = oc.officer_id
 WHERE oc.officer_id is NULL;
 
 -- Cohort 3 count: All Other Officers ~ 23,780
 SELECT COUNT(DISTINCT "do".id)
 FROM data_officer "do"
-LEFT JOIN officers_cohorts oc ON
+LEFT JOIN working_cohorts oc ON
     "do".id = oc.officer_id
 WHERE oc.officer_id is NULL;
 
@@ -54,8 +54,33 @@ FROM data_officer;
 --      when condition is all other officers, cohorts is 3 (community),
 --  TODO:  Reshape cols from data_officer into officers_cohorts to match
 
+SELECT * FROM working_cohorts;
+SELECT * FROM data_officer LIMIT 10;
+
+DROP TABLE IF EXISTS working_cohort_3;
+CREATE TEMP TABLE working_cohort_3 AS (
+    SELECT "do".id as officer_id,
+           CONCAT("do".first_name, "do".last_name) AS officer_name
+    FROM data_officer "do"
+    LEFT JOIN working_cohorts oc ON
+        "do".id = oc.officer_id
+    WHERE oc.officer_id is NULL
+    );
+
+DROP TABLE IF EXISTS officers_cohorts;
+CREATE TEMP TABLE officers_cohorts AS (
+    SELECT officer_id, NULL as crew_id, officer_name, NULL as detected_crew, 3 as cohort
+    FROM working_cohort_3
+    UNION
+    SELECT officer_id, crew_id, officer_name, detected_crew, NULL as cohort
+    FROM working_cohorts
+);
 
 
+UPDATE officers_cohorts
+    SET cohort = (CASE WHEN detected_crew = 'true' AND cohort IS NULL THEN 1 ELSE 2 END);
+
+SELECT * FROM officers_cohorts;
 
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
