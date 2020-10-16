@@ -5,6 +5,48 @@
 --              Counts of accusals, co-accusals, and disciplinary actions
 --              Award payouts
 
+-- Step A: Create a working table for cohorts
+
+DROP TABLE IF EXISTS officers_cohorts;
+CREATE TEMP TABLE officers_cohorts AS (
+    SELECT doc.officer_id, doc.crew_id, doc.officer_name, dc.detected_crew
+    FROM data_officercrew doc
+    LEFT JOIN data_crew dc
+        on doc.crew_id = dc.community_id
+    WHERE doc.crew_id in (
+        SELECT dc.community_id
+        FROM data_crew
+        )
+);
+-- Cohort 1 Crews: ~1,156
+SELECT COUNT(DISTINCT officer_id)
+FROM officers_cohorts
+WHERE detected_crew = 'true';
+
+-- Cohort 2 Community and not Crew: ~10,071
+SELECT COUNT(DISTINCT officer_id)
+FROM officers_cohorts
+WHERE detected_crew = 'false';
+
+-- Find all officers who are not in crews or communities (Cohort 3)
+SELECT "do".id, "do".first_name, "do".last_name
+FROM data_officer "do"
+LEFT JOIN officers_cohorts oc ON
+    "do".id = oc.officer_id
+WHERE oc.officer_id is NULL;
+
+-- Cohort 3 count: All Other Officers ~ 23,780
+SELECT COUNT(DISTINCT "do".id)
+FROM data_officer "do"
+LEFT JOIN officers_cohorts oc ON
+    "do".id = oc.officer_id
+WHERE oc.officer_id is NULL;
+
+
+-- Total Officer Population: 35,007
+SELECT COUNT(DISTINCT id)
+FROM data_officer;
+
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
 -- Where the average is given by the sum of co-accusals in a Cohort divided by the total number of
