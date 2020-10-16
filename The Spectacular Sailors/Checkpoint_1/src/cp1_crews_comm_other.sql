@@ -46,7 +46,7 @@ LEFT JOIN working_cohort_0 oc ON
     "do".id = oc.officer_id
 WHERE oc.officer_id is NULL;
 
--- Total Officer Population: 35,007
+-- Total Officer Population: ~ 35,007
 SELECT COUNT(DISTINCT id)
 FROM data_officer;
 
@@ -104,8 +104,7 @@ SELECT * FROM officers_cohorts;
 
 -- Q1 Part B: Join accusals and disciplinary data to officers_cohorts
 
--- TODO: @Milan
-
+-- TODO: @Milan or @Pengyi
 
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
