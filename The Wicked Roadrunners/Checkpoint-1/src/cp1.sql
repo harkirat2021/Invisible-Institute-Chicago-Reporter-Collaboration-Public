@@ -49,7 +49,6 @@ LIMIT 1;
 
 /* 3. What is the average number of unit changes over a total career for disciplined vs. not disciplined cops?
 */
-
 /* Disciplined cops */
 SELECT avg(unit_changes)
 FROM (select data_officerhistory.officer_id as officer_id, count(data_officerhistory.unit_id) as unit_changes
@@ -79,5 +78,88 @@ WHERE disciplined IS TRUE
 GROUP BY final_outcome
 ORDER BY COUNT(*) DESC
 LIMIT 1;
+
+
+/* !!! ****** Resubmission ****** !!! */
+
+/* Question 2 */
+/* What is the most common offense/misconduct that leads to settlement? */
+/* The difference between this query and the one above is here we look at every misconduct category individually, even if they occur together */
+SELECT '%False arrest or report%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%False arrest or report%'
+union
+SELECT '%Excessive force%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Excessive force%'
+union
+SELECT '%Threats/intimidation%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Threats/intimidation%'
+union
+SELECT '%Illegal search/seizure%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Illegal search/seizure%'
+union
+SELECT '%Destroy/conceal/fabricate evidence%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Destroy/conceal/fabricate evidence%'
+union
+SELECT '%Damage to property%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Damage to property%'
+union
+SELECT '%Stolen property%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Stolen property%'
+union
+SELECT '%Racial epithets%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Racial epithets%'
+union
+SELECT '%Strip search%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Strip search%'
+union
+SELECT '%Shooting%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Shooting%'
+union
+SELECT '%Pattern/practice of misconduct%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Pattern/practice of misconduct%'
+union
+SELECT '%Witness manipulation%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Witness manipulation%'
+union
+SELECT '%Failure to provide medical care%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Failure to provide medical care%'
+union
+SELECT '%Sexual harassment/abuse%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Sexual harassment/abuse%'
+union
+SELECT '%Forced confession%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Forced confession%'
+union
+SELECT '%Legal access denied%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Legal access denied%'
+union
+SELECT '%Torture%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Torture%'
+union
+SELECT '%Bribery%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Bribery%'
+union
+SELECT '%Retaliation%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Retaliation%'
+union
+SELECT '%Not misconduct%', count(*) from lawsuit_lawsuit
+WHERE total_settlement > 0 and CAST(misconducts as varchar) LIKE '%Not misconduct%';
+
+/* Question 3 */
+/* Which units/beats have the most disciplined cops? */
+select unit, beat, count(*) from
+(select distinct unit, beat, officer_id from data_officerassignmentattendance as t1
+inner join
+(select * from data_officer where discipline_count > 0) as t2
+on t1.officer_id = t2.id) as t3
+group by unit, beat
+order by count(*) desc;
+
+
+
+
+
+
+
 
 
