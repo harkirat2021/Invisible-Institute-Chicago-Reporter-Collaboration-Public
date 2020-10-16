@@ -8,35 +8,25 @@ Our group analyzed the following 6 questions. Each question may have subsections
 `script2.sql`
 
 3. What proportion of officers with 0, 1+, 2+, 3+, etc. allegations get promoted each year?  
-_0 allegations: `script3a.sql`  
-_1 allegation: `script3b.sql`  
-_2 allegations: `script3c.sql`  
-_3 allegations: `script3d.sql`  
-_4 allegations: `script3e.sql`  
+_0 allegations_: `script3a.sql`  
+_1 allegation_: `script3b.sql`  
+_2 allegations_: `script3c.sql`  
+_3 allegations_: `script3d.sql`  
+_4 allegations_: `script3e.sql`  
 
 4. What proportion of officers with 0, 1+, 2+, 3+, etc. allegations get awards?  
-_0 allegations: `script4a.sql`  
-_1 allegation: `script4b.sql`  
-_2 allegations: `script4c.sql`  
-_3 allegations: `script4d.sql`  
-_4 allegations: `script4e.sql`  
+_0 allegations_: `script4a.sql`  
+_1 allegation_: `script4b.sql`  
+_2 allegations_: `script4c.sql`  
+_3 allegations_: `script4d.sql`  
+_4 allegations_: `script4e.sql`  
 
 5. What proportion of officers with 1 or more allegation and 0, 1+, 2+ sustained allegations get promoted each year?  
-_0 sustained allegations: `script5a.sql`  
-_1 sustained allegation: `script5b.sql`  
-_2 sustained allegations: `script5c.sql`  
+_0 sustained allegations_: `script5a.sql`  
+_1 sustained allegation_: `script5b.sql`  
+_2 sustained allegations_: `script5c.sql`  
 
 6. What proportion of officers with 1 or more allegation and 0, 1+, 2+ sustained allegations get awards each year?  
-_0 sustained allegations: `script6a.sql`  
-_1 sustained allegation: `script6b.sql`  
-_2 sustained allegations: `script6c.sql`  
-
-5. What proportion of officers with 1 or more allegations and 0, 1+, 2+ sustained allegations get promoted each year?  
-_0 sustained allegations:_ `script5a.sql`  
-_1 sustained allegation:_ `script5b.sql`  
-_2 sustained allegations:_ `script5c.sql`  
-
-6. What proportion of officers with 1 or more allegations and 0, 1+, 2+ sustained allegations get awards each year?  
-_0 sustained allegations:_ `script6a.sql`  
-_1 sustained allegation:_ `script6b.sql`  
-_2 sustained allegations:_ `script6c.sql`  
+_0 sustained allegations_: `script6a.sql`  
+_1 sustained allegation_: `script6b.sql`  
+_2 sustained allegations_: `script6c.sql`  
