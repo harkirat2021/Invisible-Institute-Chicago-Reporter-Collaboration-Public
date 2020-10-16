@@ -104,7 +104,6 @@ SELECT * FROM officers_cohorts;
 
 -- Q1 Part B: Join accusals and disciplinary data to officers_cohorts
 
-
 -- Return allegation and officer data for all officers based on cohorts
 DROP TABLE IF EXISTS officers_cohorts_data;
 CREATE TEMP TABLE officers_cohorts_data AS (
