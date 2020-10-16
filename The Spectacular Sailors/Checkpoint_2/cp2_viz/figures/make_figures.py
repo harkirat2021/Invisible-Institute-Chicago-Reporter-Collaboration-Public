@@ -10,7 +10,7 @@ class PlotData:
 
         data_plot = go.Scatter(
             x=df.index_value,
-            y=df.years_on_force,
+            y=df.current_age,
             mode='markers',
             marker=dict(
                 size=df.index_value * 30,
