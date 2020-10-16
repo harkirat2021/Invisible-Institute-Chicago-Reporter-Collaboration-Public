@@ -21,24 +21,22 @@ _2 allegations: `script4c.sql`
 _3 allegations: `script4d.sql`  
 _4 allegations: `script4e.sql`  
 
-<<<<<<< HEAD
-5. What proportion of officers with 1 or more allegation and 0, 1+, 2+ sustained allegations get promoted each year?
+5. What proportion of officers with 1 or more allegation and 0, 1+, 2+ sustained allegations get promoted each year?  
 _0 sustained allegations: `script5a.sql`  
 _1 sustained allegation: `script5b.sql`  
 _2 sustained allegations: `script5c.sql`  
 
-6. What proportion of officers with 1 or more allegation and 0, 1+, 2+ sustained allegations get awards each year?
+6. What proportion of officers with 1 or more allegation and 0, 1+, 2+ sustained allegations get awards each year?  
 _0 sustained allegations: `script6a.sql`  
 _1 sustained allegation: `script6b.sql`  
 _2 sustained allegations: `script6c.sql`  
-=======
-5. What proportion of officers with 1 or more allegations and 0, 1+, 2+ sustained allegations get promoted each year?
-_0 sustained allegations:_ script5a.sql
-_1 sustained allegation:_ script5b.sql
-_2 sustained allegations:_ script5c.sql
 
-6. What proportion of officers with 1 or more allegations and 0, 1+, 2+ sustained allegations get awards each year?
-_0 sustained allegations:_ script6a.sql
-_1 sustained allegation:_ script6b.sql
-_2 sustained allegations:_ script6c.sql
->>>>>>> 12b326109079f4ee36a20403f7383607a4006156
+5. What proportion of officers with 1 or more allegations and 0, 1+, 2+ sustained allegations get promoted each year?  
+_0 sustained allegations:_ `script5a.sql`  
+_1 sustained allegation:_ `script5b.sql`  
+_2 sustained allegations:_ `script5c.sql`  
+
+6. What proportion of officers with 1 or more allegations and 0, 1+, 2+ sustained allegations get awards each year?  
+_0 sustained allegations:_ `script6a.sql`  
+_1 sustained allegation:_ `script6b.sql`  
+_2 sustained allegations:_ `script6c.sql`  
