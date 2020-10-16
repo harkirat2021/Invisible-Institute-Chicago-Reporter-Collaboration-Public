@@ -102,14 +102,11 @@ SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 3;
 SELECT * FROM officers_cohorts;
 
 
-
-
-
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
 -- Where the average is given by the sum of co-accusals in a Cohort divided by the total number of
 -- complaints (where a complaint is a unique CRID).
 
-
+-- TODO: @Milan
 
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
