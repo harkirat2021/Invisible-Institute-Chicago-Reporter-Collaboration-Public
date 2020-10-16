@@ -5,6 +5,8 @@
 --              Counts of accusals, co-accusals, and disciplinary actions
 --              Award payouts
 
+-- Q1 Part A: Identify Officers by Cohort
+
 -- Create a base table of officers in crews and in communities
 DROP TABLE IF EXISTS working_cohort_0;
 CREATE TEMP TABLE working_cohort_0 AS (
@@ -100,11 +102,17 @@ SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 3;
 SELECT * FROM officers_cohorts;
 
 
+-- Q1 Part B: Join accusals and disciplinary data to officers_cohorts
+
+-- TODO: @Milan
+
+
+
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
 -- Where the average is given by the sum of co-accusals in a Cohort divided by the total number of
 -- complaints (where a complaint is a unique CRID).
 
--- TODO: @Milan
+
 
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
