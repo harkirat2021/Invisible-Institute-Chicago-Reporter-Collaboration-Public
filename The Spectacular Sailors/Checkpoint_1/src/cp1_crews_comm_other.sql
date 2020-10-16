@@ -44,10 +44,18 @@ LEFT JOIN officers_cohorts oc ON
     "do".id = oc.officer_id
 WHERE oc.officer_id is NULL;
 
-
 -- Total Officer Population: 35,007
 SELECT COUNT(DISTINCT id)
 FROM data_officer;
+
+--  TODO:   Update officers_cohorts with cohorts col, where
+--      when detected_crew = true, cohorts is 1 (crew),
+--      when detected_crew = false, cohorts is 2 (community),
+--      when condition is all other officers, cohorts is 3 (community),
+--  TODO:  Reshape cols from data_officer into officers_cohorts to match
+
+
+
 
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
