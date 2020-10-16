@@ -5,8 +5,6 @@
 --              Counts of accusals, co-accusals, and disciplinary actions
 --              Award payouts
 
--- Step A: Count Cohort populations (1) Crews Only, (2) Communities Only, (3) All others
-
 -- Create a base table of officers in crews and in communities
 DROP TABLE IF EXISTS working_cohort_0;
 CREATE TEMP TABLE working_cohort_0 AS (
