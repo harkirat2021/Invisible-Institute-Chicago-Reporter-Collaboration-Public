@@ -147,6 +147,10 @@ CREATE TEMP TABLE officers_cohorts_data AS (
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18
 );
 
+-- View the result of query 1 breakouts by cohort
+SELECT * FROM officers_cohorts_data;
+
+
 -- Data Note: The total population of officers is reduced to 23,444 (not all officers have allegations)
 -- There are 23,444 distinct officer IDs in data_officer_allegation
 DROP TABLE IF EXISTS officers_cohorts_countsallegation;
@@ -158,12 +162,6 @@ CREATE TEMP TABLE officers_cohorts_countsallegation AS (
 
 -- View subtotal counts of officers with at least one allegation
 SELECT * FROM officers_cohorts_countsallegation;
-
--- For comparison to data_officerallegation
-SELECT COUNT(distinct officer_id) FROM data_officerallegation;
-
--- View the result of query 1 breakouts by cohort
-SELECT * FROM officers_cohorts_data;
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
 -- Where the average is given by the sum of co-accusals in a Cohort divided by the total number of
@@ -273,7 +271,18 @@ SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal3;
 
 
 -- combine averge coaccusal results into table for export and analysis
+-- Officer Counts by Cohort
+DROP TABLE IF EXISTS officers_cohorts_counts;
+CREATE TEMP TABLE officers_cohorts_counts AS (
+    SELECT officers_cohorts_countstotal.cohort,
+           officers_cohorts_countstotal.total_officers,
+           occ.officers_with_allegations
+    FROM officers_cohorts_countstotal
+             INNER JOIN officers_cohorts_countsallegation occ on officers_cohorts_countstotal.cohort = occ.cohort
+);
 
+-- View Counts table
+SELECT * FROM officers_cohorts_counts;
 
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
