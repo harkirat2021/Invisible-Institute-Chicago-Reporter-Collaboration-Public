@@ -96,10 +96,11 @@ ALTER TABLE officers_cohorts
 -- When cohort = 1, then crew, when cohort = 2, then community, when cohort = 3, then all others
 
 -- Verify Counts
-SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 1;
-SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 2;
-SELECT COUNT(DISTINCT officer_id) FROM officers_cohorts WHERE cohort = 3;
+SELECT cohort, COUNT(DISTINCT officer_id)  as distinct_officer_ids
+FROM officers_cohorts
+GROUP BY cohort;
 
+-- View officers_cohorts table
 SELECT * FROM officers_cohorts;
 
 
@@ -140,6 +141,13 @@ CREATE TEMP TABLE officers_cohorts_data AS (
         FROM officers_cohorts)
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18
 );
+
+-- FIXME: there appears to be some data loss from Q1
+-- issue: number of officers in each cohort reduced after the join to make officers_cohorts_data
+SELECT count(distinct officer_id)
+FROM officers_cohorts_data
+GROUP BY cohort;
+
 
 -- View the result of query 1 breakouts by cohort
 SELECT * FROM officers_cohorts_data;
@@ -252,10 +260,7 @@ SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal3;
 
 
 -- combine averge coaccusal results into table for export and analysis
--- FIXME: there appears to be some data loss from Q1
-SELECT count(distinct officer_id)
-FROM officers_cohorts_data
-GROUP BY cohort;
+
 
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
