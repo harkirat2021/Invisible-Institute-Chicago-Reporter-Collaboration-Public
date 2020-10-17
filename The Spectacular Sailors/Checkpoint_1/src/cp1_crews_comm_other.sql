@@ -151,7 +151,7 @@ CREATE TEMP TABLE officers_cohorts_data AS (
 -- There are 23,444 distinct officer IDs in data_officer_allegation
 DROP TABLE IF EXISTS officers_cohorts_countsallegation;
 CREATE TEMP TABLE officers_cohorts_countsallegation AS (
-    SELECT count(distinct officer_id)
+    SELECT cohort, COUNT(DISTINCT officer_id) as officers_with_allegations
     FROM officers_cohorts_data
     GROUP BY cohort
 );
