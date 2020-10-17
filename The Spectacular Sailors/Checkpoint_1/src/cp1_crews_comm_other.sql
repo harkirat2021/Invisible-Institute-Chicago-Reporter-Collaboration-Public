@@ -216,7 +216,6 @@ FROM officers_cohorts_coaccusal2;
 -- Return average coaccused_count for cohort 2
 SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal2;
 
-
 -- unique complaint count in cohort 3 (47137 counts)
 SELECT count(Distinct crid)
 FROM officers_cohorts_data
@@ -252,6 +251,11 @@ FROM officers_cohorts_coaccusal3;
 SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal3;
 
 
+-- combine averge coaccusal results into table for export and analysis
+-- FIXME: there appears to be some data loss from Q1
+SELECT count(distinct officer_id)
+FROM officers_cohorts_data
+GROUP BY cohort;
 
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
