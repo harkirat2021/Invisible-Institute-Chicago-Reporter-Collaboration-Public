@@ -65,6 +65,7 @@ CREATE TEMP TABLE working_cohort_3 AS (
     WHERE oc.officer_id is NULL
     );
 
+
 DROP TABLE IF EXISTS officers_cohorts;
 CREATE TEMP TABLE officers_cohorts AS (
     SELECT officer_id, NULL as crew_id, officer_name, NULL as detected_crew, 3 as cohort
@@ -146,6 +147,107 @@ SELECT * FROM officers_cohorts_data;
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
 -- Where the average is given by the sum of co-accusals in a Cohort divided by the total number of
 -- complaints (where a complaint is a unique CRID).
+
+-- unique complaint count in cohort 1 (20174 counts)
+SELECT count(Distinct crid)
+FROM officers_cohorts_data
+WHERE cohort = '1';
+
+-- create sub-table with all officers in cohort 1 (in a crew)
+DROP TABLE IF EXISTS officers_cohorts_1;
+CREATE TEMP TABLE officers_cohorts_1 AS (
+    SELECT ocd.officer_id, ocd.crid, ocd.cohort, ocd.coaccused_count
+    FROM officers_cohorts_data ocd
+    WHERE cohort = '1'
+);
+
+-- create a table with all rows of distinct crid for cohort 1
+DROP TABLE IF EXISTS officers_cohorts_coaccusal1;
+CREATE TEMP TABLE officers_cohorts_coaccusal1 AS (
+    SELECT oc1.officer_id, oc1.crid, oc1.cohort, oc1.coaccused_count
+    FROM officers_cohorts_1 oc1
+    JOIN (SELECT crid, min(officer_id) as minid from officers_cohorts_1 group by crid) x
+    ON x.crid = oc1.crid
+    AND x.minid = oc1.officer_id
+);
+
+-- validates count if it's having distinct crid, (20174 counts)
+SELECT count(*) as sum_com1
+FROM officers_cohorts_coaccusal1;
+
+-- sum of co-accusals in cohort 1 (56294 times)
+SELECT SUM(coaccused_count) as sum_coa1
+FROM officers_cohorts_coaccusal1;
+
+-- FIXME: how to divide 56294 by 20174 in sql, this is the average number of co-accusals for cohort 1
+
+
+-- unique complaint count in cohort 2 (96651 counts)
+SELECT count(Distinct crid)
+FROM officers_cohorts_data
+WHERE cohort = '2';
+
+-- create sub-table with all officers in cohort 2 (in a crew)
+DROP TABLE IF EXISTS officers_cohorts_2;
+CREATE TEMP TABLE officers_cohorts_2 AS (
+    SELECT ocd.officer_id, ocd.crid, ocd.cohort, ocd.coaccused_count
+    FROM officers_cohorts_data ocd
+    WHERE cohort = '2'
+);
+
+-- create a table with all rows of distinct crid for cohort 2
+DROP TABLE IF EXISTS officers_cohorts_coaccusal2;
+CREATE TEMP TABLE officers_cohorts_coaccusal2 AS (
+    SELECT oc2.officer_id, oc2.crid, oc2.cohort, oc2.coaccused_count
+    FROM officers_cohorts_2 oc2
+    JOIN (SELECT crid, min(officer_id) as minid from officers_cohorts_2 group by crid) y
+    ON y.crid = oc2.crid
+    AND y.minid = oc2.officer_id
+);
+
+-- validates count if it's having distinct crid, (96651 counts)
+SELECT count(*) as sum_com2
+FROM officers_cohorts_coaccusal2;
+
+-- sum of co-accusals in cohort 2 (196844 times)
+SELECT SUM(coaccused_count) as sum_coa2
+FROM officers_cohorts_coaccusal2;
+
+-- FIXME: how to divide 196844 by 96651 in sql, this is the average number of co-accusals for cohort 2
+
+
+-- unique complaint count in cohort 3 (47137 counts)
+SELECT count(Distinct crid)
+FROM officers_cohorts_data
+WHERE cohort = '3';
+
+-- create sub-table with all officers in cohort 3 (in a crew)
+DROP TABLE IF EXISTS officers_cohorts_3;
+CREATE TEMP TABLE officers_cohorts_3 AS (
+    SELECT ocd.officer_id, ocd.crid, ocd.cohort, ocd.coaccused_count
+    FROM officers_cohorts_data ocd
+    WHERE cohort = '3'
+);
+
+-- create a table with all rows of distinct crid for cohort 3
+DROP TABLE IF EXISTS officers_cohorts_coaccusal3;
+CREATE TEMP TABLE officers_cohorts_coaccusal3 AS (
+    SELECT oc3.officer_id, oc3.crid, oc3.cohort, oc3.coaccused_count
+    FROM officers_cohorts_3 oc3
+    JOIN (SELECT crid, min(officer_id) as minid from officers_cohorts_3 group by crid) z
+    ON z.crid = oc3.crid
+    AND z.minid = oc3.officer_id
+);
+
+-- validates count if it's having distinct crid, (47137 counts)
+SELECT count(*) as sum_com3
+FROM officers_cohorts_coaccusal3;
+
+-- sum of co-accusals in cohort 3 (91000 times)
+SELECT SUM(coaccused_count) as sum_coa3
+FROM officers_cohorts_coaccusal3;
+
+-- FIXME: how to divide 91000 by 47137 in sql, this is the average number of co-accusals for cohort 3
 
 
 
