@@ -287,13 +287,27 @@ CREATE TEMP TABLE officers_cohorts_coaccused AS (
 -- view result from above
 SELECT * FROM officers_cohorts_coaccused;
 
+-- Return a count of officers_cohorts_coaccused_counts
+DROP TABLE IF EXISTS officers_cohorts_coaccused_counts;
+CREATE TEMP TABLE officers_cohorts_coaccused_counts AS (
+    SELECT cohort, COUNT(DISTINCT crid) AS unique_crid_count, AVG(coaccused_count) AS avg_coaccused_count
+    FROM officers_cohorts_coaccused
+    GROUP BY cohort
+);
+
+-- view returned counts with coacussals
+SELECT * FROM officers_cohorts_coaccused_counts
+
 DROP TABLE IF EXISTS officers_cohorts_counts;
 CREATE TEMP TABLE officers_cohorts_counts AS (
     SELECT officers_cohorts_countstotal.cohort,
            officers_cohorts_countstotal.total_officers,
-           occ.officers_with_allegations
+           occ.officers_with_allegations,
+           o.unique_crid_count,
+           o.avg_coaccused_count
     FROM officers_cohorts_countstotal
             INNER JOIN officers_cohorts_countsallegation occ on officers_cohorts_countstotal.cohort = occ.cohort
+            INNER JOIN officers_cohorts_coaccused_counts o on officers_cohorts_countstotal.cohort = o.cohort
 );
 
 -- View Counts table
