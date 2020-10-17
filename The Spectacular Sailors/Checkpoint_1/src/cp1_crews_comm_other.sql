@@ -95,13 +95,18 @@ ALTER TABLE officers_cohorts
 -- When community_id is 0, then not in a community
 -- When cohort = 1, then crew, when cohort = 2, then community, when cohort = 3, then all others
 
--- Verify Counts
-SELECT cohort, COUNT(DISTINCT officer_id)  as distinct_officer_ids
-FROM officers_cohorts
-GROUP BY cohort;
-
 -- View officers_cohorts table
 SELECT * FROM officers_cohorts;
+
+-- Return counts as a table
+DROP TABLE IF EXISTS officers_cohorts_countstotal;
+CREATE TEMP TABLE officers_cohorts_countstotal AS (
+SELECT cohort, COUNT(DISTINCT officer_id)  as total_officers
+FROM officers_cohorts
+GROUP BY cohort);
+
+-- View officers counts table
+SELECT * FROM officers_cohorts_countstotal
 
 
 -- Q1 Part B: Join accusals and disciplinary data to officers_cohorts
@@ -142,12 +147,20 @@ CREATE TEMP TABLE officers_cohorts_data AS (
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18
 );
 
--- FIXME: there appears to be some data loss from Q1
--- issue: number of officers in each cohort reduced after the join to make officers_cohorts_data
-SELECT count(distinct officer_id)
-FROM officers_cohorts_data
-GROUP BY cohort;
+-- Data Note: The total population of officers is reduced to 23,444 (not all officers have allegations)
+-- There are 23,444 distinct officer IDs in data_officer_allegation
+DROP TABLE IF EXISTS officers_cohorts_countsallegation;
+CREATE TEMP TABLE officers_cohorts_countsallegation AS (
+    SELECT count(distinct officer_id)
+    FROM officers_cohorts_data
+    GROUP BY cohort
+);
 
+-- View subtotal counts of officers with at least one allegation
+SELECT * FROM officers_cohorts_countsallegation;
+
+-- For comparison to data_officerallegation
+SELECT COUNT(distinct officer_id) FROM data_officerallegation;
 
 -- View the result of query 1 breakouts by cohort
 SELECT * FROM officers_cohorts_data;
