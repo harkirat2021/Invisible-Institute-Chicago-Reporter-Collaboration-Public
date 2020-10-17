@@ -269,16 +269,31 @@ FROM officers_cohorts_coaccusal3;
 -- Return average coaccused_count for cohort 3
 SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal3;
 
-
 -- combine averge coaccusal results into table for export and analysis
 -- Officer Counts by Cohort
+
+DROP TABLE IF EXISTS officers_cohorts_coaccused;
+CREATE TEMP TABLE officers_cohorts_coaccused AS (
+    SELECT *
+    FROM officers_cohorts_coaccusal3
+    UNION
+    SELECT *
+    FROM officers_cohorts_coaccusal2
+    UNION
+    SELECT *
+    FROM officers_cohorts_coaccusal1
+);
+
+-- view result from above
+SELECT * FROM officers_cohorts_coaccused;
+
 DROP TABLE IF EXISTS officers_cohorts_counts;
 CREATE TEMP TABLE officers_cohorts_counts AS (
     SELECT officers_cohorts_countstotal.cohort,
            officers_cohorts_countstotal.total_officers,
            occ.officers_with_allegations
     FROM officers_cohorts_countstotal
-             INNER JOIN officers_cohorts_countsallegation occ on officers_cohorts_countstotal.cohort = occ.cohort
+            INNER JOIN officers_cohorts_countsallegation occ on officers_cohorts_countstotal.cohort = occ.cohort
 );
 
 -- View Counts table
