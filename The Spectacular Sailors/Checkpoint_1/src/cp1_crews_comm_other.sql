@@ -141,7 +141,7 @@ CREATE TEMP TABLE officers_cohorts_data AS (
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18
 );
 
-
+-- View the result of query 1 breakouts by cohort
 SELECT * FROM officers_cohorts_data;
 
 -- Question 2: Within each Cohort, what is the average number of co-accusals per individual complaint?
@@ -179,8 +179,8 @@ FROM officers_cohorts_coaccusal1;
 SELECT SUM(coaccused_count) as sum_coa1
 FROM officers_cohorts_coaccusal1;
 
--- FIXME: how to divide 56294 by 20174 in sql, this is the average number of co-accusals for cohort 1
-
+-- Return AVG coaccused_count for cohort 1
+SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal1;
 
 -- unique complaint count in cohort 2 (96651 counts)
 SELECT count(Distinct crid)
@@ -213,7 +213,8 @@ FROM officers_cohorts_coaccusal2;
 SELECT SUM(coaccused_count) as sum_coa2
 FROM officers_cohorts_coaccusal2;
 
--- FIXME: how to divide 196844 by 96651 in sql, this is the average number of co-accusals for cohort 2
+-- Return average coaccused_count for cohort 2
+SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal2;
 
 
 -- unique complaint count in cohort 3 (47137 counts)
@@ -247,7 +248,8 @@ FROM officers_cohorts_coaccusal3;
 SELECT SUM(coaccused_count) as sum_coa3
 FROM officers_cohorts_coaccusal3;
 
--- FIXME: how to divide 91000 by 47137 in sql, this is the average number of co-accusals for cohort 3
+-- Return average coaccused_count for cohort 3
+SELECT AVG(coaccused_count) FROM officers_cohorts_coaccusal3;
 
 
 
