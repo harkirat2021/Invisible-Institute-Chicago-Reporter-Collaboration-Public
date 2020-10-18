@@ -6,7 +6,7 @@
 --              Award payouts
 
 -- Q1 Part A: Identify Officers by Cohort
-
+select * from data_officer
 -- Create a base table of officers in crews and in communities
 DROP TABLE IF EXISTS working_cohort_0;
 CREATE TEMP TABLE working_cohort_0 AS (
@@ -146,7 +146,7 @@ CREATE TEMP TABLE officers_cohorts_data AS (
     WHERE "do".id in (
         SELECT officers_cohorts.officer_id
         FROM officers_cohorts)
-    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17, 18
+    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 );
 
 -- View the result of query 1 breakouts by cohort
@@ -198,25 +198,6 @@ CREATE TEMP TABLE officers_cohorts_data AS (
 
 select * from officers_cohorts_data
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -390,7 +371,7 @@ SELECT * FROM officers_cohorts_counts;
 select * from officers_cohorts_countsallegation;
 select cast (disciplined_good as decimal) / officers_with_allegations as allegations_w_action, cohort
 from officers_cohorts_countsallegation
-order by allegations_w_action
+
 
 -- Question 4: For each Cohort, describe the average police officer in terms of demographics, accusals, and payout data.
 -- By percentage:
@@ -402,4 +383,47 @@ order by allegations_w_action
 --              Payout data in thousands of dollars
 --              Accusations, Disciplinary actions, or percentage from Question 3
 
+-- create a table with all officer demographics
+DROP TABLE IF EXISTS officers_payouts;
+CREATE TEMP TABLE officers_payouts AS (
+    SELECT o.officer_id,
+           d.crew_id,
+           d.community_id,
+           d.cohort,
+           d.crid,
+           o.lawsuit_id,
+           p.settlement,
+           p.legal_fees,
+           p.settlement + p.legal_fees as total_waste,
+           d.gender,
+           d.race,
+           case when age between 21 and 24 then '21-24'
+           when age between 25 and 34 then '25-34'
+               when age between 35 and 44 then '35-44'
+                   when age between 45 and 54 then '45-54'
+                       when age between 55 and 64 then '55-64'
+                           when age >=65 then '65+' end as age_bucket,
+           case when year(date) - year(??.appointed_date) between 0 and 9 then '0-9'
+                when year(date) - year(??.appointed_date) between 10 and 14 then '10-14'
+                    when year(date) - year(??.appointed_date) between 15 and 19 then '15-19'
+                        when year(date) - year(??.appointed_date) between 20 and 24 then '20-24'
+                            when year(date) - year(??.appointed_date) between 25 and 29 then '25-29'
+                                when year(date) - year(??.appointed_date) >= 30 '30+' end as years_service,
+           d.disciplined_flag,
+           d.Coaccused_Count
+    FROM lawsuit_lawsuit_officers o
+        LEFT JOIN lawsuit_payment p
+            on o.lawsuit_id = p.lawsuit_id
+        LEFT JOIN officers_cohorts_data d
+            on o.officer_id = d.officer_id
+);
 
+--view results from demographics table above
+select * from officers_payouts
+
+
+--sum of officers total waste
+select officer_id, cohort,
+       sum(total_waste) as total_waste
+from officers_payouts
+group by 1,2
