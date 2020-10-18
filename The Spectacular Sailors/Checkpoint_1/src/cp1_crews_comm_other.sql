@@ -131,7 +131,9 @@ CREATE TEMP TABLE officers_cohorts_data AS (
            "da".beat_id,
            "da".location,
            "doa".allegation_category_id,
-           "doa".disciplined,
+           case when disciplined IS Null
+   or "doa".disciplined = 'False'then 0 when "doa".disciplined = 'true' then 1 end as disciplined_flag,
+            "doa".disciplined,
            sum ("da".coaccused_count) as Coaccused_Count
 
     FROM data_officer "do"
@@ -150,12 +152,80 @@ CREATE TEMP TABLE officers_cohorts_data AS (
 -- View the result of query 1 breakouts by cohort
 SELECT * FROM officers_cohorts_data;
 
+/* Milan's Space
+SELECT disciplined FROM officers_cohorts_data
+where
+   disciplined IS Null
+   or disciplined = 'False';
+
+
+DROP TABLE IF EXISTS officers_cohorts_data;
+CREATE TEMP TABLE officers_cohorts_data AS (
+    SELECT "oc".officer_id,
+           "oc".crew_id,
+           "oc".community_id,
+           "oc".cohort,
+           "do".gender,
+           "do".race,
+           "do".appointed_date,
+           "do".active,
+           "do".complaint_percentile,
+           "do".civilian_allegation_percentile,
+           "do".last_unit_id,
+           "da".crid,
+           "da".incident_date,
+           "da".point,
+           "da".beat_id,
+           "da".location,
+           "doa".allegation_category_id,
+           case when disciplined IS Null
+   or "doa".disciplined = 'False'then 0 when "doa".disciplined = 'true' then 1 end as disciplined_flag,
+            "doa".disciplined,
+           sum ("da".coaccused_count) as Coaccused_Count
+
+    FROM data_officer "do"
+             LEFT JOIN data_officerallegation "doa"
+                       on "do".id = "doa".officer_id
+             LEFT JOIN data_allegation "da"
+                       on "doa".allegation_id = "da".crid
+             RIGHT JOIN officers_cohorts "oc"
+                       on "doa".officer_id = "oc".officer_id
+    WHERE "do".id in (
+        SELECT officers_cohorts.officer_id
+        FROM officers_cohorts)
+    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+);
+
+select * from officers_cohorts_data
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- Data Note: The total population of officers is reduced to 23,444 (not all officers have allegations)
 -- There are 23,444 distinct officer IDs in data_officer_allegation
 DROP TABLE IF EXISTS officers_cohorts_countsallegation;
 CREATE TEMP TABLE officers_cohorts_countsallegation AS (
-    SELECT cohort, COUNT(DISTINCT officer_id) as officers_with_allegations
+    SELECT cohort, COUNT(DISTINCT officer_id) as officers_with_allegations,
+           sum(disciplined_flag) as disciplined_good
     FROM officers_cohorts_data
     GROUP BY cohort
 );
@@ -317,6 +387,10 @@ SELECT * FROM officers_cohorts_counts;
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
 
+select * from officers_cohorts_countsallegation;
+select cast (disciplined_good as decimal) / officers_with_allegations as allegations_w_action, cohort
+from officers_cohorts_countsallegation
+order by allegations_w_action
 
 -- Question 4: For each Cohort, describe the average police officer in terms of demographics, accusals, and payout data.
 -- By percentage:
