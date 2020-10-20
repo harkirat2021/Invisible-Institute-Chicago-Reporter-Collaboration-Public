@@ -64,6 +64,7 @@ Once the environment is set up, a model can be trained using the provided jsonne
 
 `allennlp train complaint_classifier_bag_of_embeddings.jsonnet -s boe_model --include-package complaint_classifier_module`
 
+Both scripts are set up to use a CPU for training by default. The bag of embeddings model will train quickly on a CPU, however the BERT model will not. If you have access to a CUDA compatible GPU, you can modify the `complaint_classifier_bert_base.jsonnet` file's line where it specifies the `"cuda_device": -1` to be `"cuda_device": 0` (meaning you'll use the first GPU available).
 
 ## Evaluating the Model (for testing purposes)
 Then, to evaluate this model on the test dataset, use the following command in the terminal:

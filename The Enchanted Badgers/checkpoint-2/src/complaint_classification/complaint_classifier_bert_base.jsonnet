@@ -43,6 +43,6 @@ local bert_model = "bert-base-uncased";
             "lr": 1.0e-5
         },
         "num_epochs": 10,
-        "cuda_device": 0
+        "cuda_device": -1
     }
 }
