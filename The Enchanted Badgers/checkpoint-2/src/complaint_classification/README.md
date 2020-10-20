@@ -94,4 +94,12 @@ This will produce a file called `formatted_uncategorized_complaints.json` which 
 
 With the models properly trained and the unlabeled data pulled and processed, you can classify a dataset of unlabled/uncategorized complaints with the following command and script (from the base `complaint_classification` directory):
 
-`python classify_uncategorized_complaints.py`
+`python classify_uncategorized_complaints.py path/to/model.tar.gz`
+
+You'll of course need to replace `path/to/model.tar.gz` with the proper file path. If you previously trained bag of embeddings model using the commands above, you can use the following:
+
+`python classify_uncategorized_complaints.py boe_model/model.tar.gz`
+
+The result is a file called `uncategorized_results.json` which lists the categories and the total number of previous uncategorized complaints that were assigned to each category.
+
+
