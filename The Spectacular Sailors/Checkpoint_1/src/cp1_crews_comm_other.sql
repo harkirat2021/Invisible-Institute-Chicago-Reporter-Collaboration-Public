@@ -302,7 +302,6 @@ CREATE TEMP TABLE officers_cohorts_coaccused_counts AS (
 -- view returned counts with coacussals
 SELECT * FROM officers_cohorts_coaccused_counts;
 
-
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
 -- FIXME: Verify whether the results are accurate given base case intuition
@@ -355,7 +354,7 @@ SELECT * FROM officers_payouts;
 
 SELECT * FROM officers_cohorts_data;
 
---sum of officers total_cpst
+--sum of officers total_cost
 DROP TABLE IF EXISTS officers_costs;
 CREATE TEMP TABLE officers_costs AS (
     select cohort,
@@ -367,6 +366,16 @@ CREATE TEMP TABLE officers_costs AS (
 -- view officers_cost table above
 SELECT * FROM officers_costs;
 
+DROP TABLE IF EXISTS officers_times;
+CREATE TEMP TABLE officers_times AS (
+    SELECT cohort,
+           avg(years_on_force_at_incident) as avg_years_on_force_at_incident,
+           avg(age_at_incident) as avg_ages_at_incident
+    FROM officers_payouts
+    GROUP BY cohort
+);
+
+SELECT * FROM officers_times;
 
 DROP TABLE IF EXISTS officers_cohorts_counts;
 CREATE TEMP TABLE officers_cohorts_counts AS (
@@ -378,12 +387,15 @@ CREATE TEMP TABLE officers_cohorts_counts AS (
            o.total_coaccusals,
            o.avg_coaccused_count,
            cast (occd.is_disciplined as decimal) / o.unique_crid_count as discplined_rate,
-           ocs.total_cost
+           ocs.total_cost,
+           ot.avg_years_on_force_at_incident,
+           ot.avg_ages_at_incident
     FROM officers_cohorts_countstotal
             INNER JOIN officers_cohorts_countdisciplines occ on officers_cohorts_countstotal.cohort = occ.cohort
             INNER JOIN officers_cohorts_coaccused_counts o on officers_cohorts_countstotal.cohort = o.cohort
             INNER JOIN officers_cohorts_countdisciplines occd on officers_cohorts_countstotal.cohort = occd.cohort
             INNER JOIN officers_costs ocs on officers_cohorts_countstotal.cohort = ocs.cohort
+            INNER JOIN officers_times ot on officers_cohorts_countstotal.cohort = ot.cohort
 );
 
 -- View Counts table for Question 4
