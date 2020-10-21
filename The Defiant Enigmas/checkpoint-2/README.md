@@ -1,4 +1,5 @@
-For each of the "questions" below, the corresponding Tableau workbook for answering the question can be found in 'src/V#.twb`
+## Checkpoint 2
+For each of the "questions" below, the corresponding Tableau workbook for answering the question can be found in `src/V#.twb`
 
 1. (Line chart) Shows temporal data, each line represents an officer’s total allegation percentile group, showing the relation between their total allegation number and year.
 2. (Geo symbol map) Shows spatial data. Contains geo distribution of civilian allegations of officers above 90th percentile (in civilian allegations).
