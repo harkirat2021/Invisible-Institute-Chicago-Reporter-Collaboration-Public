@@ -121,6 +121,7 @@ CREATE TEMP TABLE officers_cohorts_data AS (
            "do".gender,
            "do".race,
            "do".appointed_date,
+           "do".birth_year,
            "do".active,
            "do".complaint_percentile,
            "do".civilian_allegation_percentile,
@@ -146,7 +147,7 @@ CREATE TEMP TABLE officers_cohorts_data AS (
     WHERE "do".id in (
         SELECT officers_cohorts.officer_id
         FROM officers_cohorts)
-    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+    group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
 );
 
 -- View the result of query 1 breakouts by cohort
@@ -307,7 +308,7 @@ SELECT * FROM officers_cohorts_coaccused_counts;
 -- FIXME: Verify whether the results are accurate given base case intuition
 select * from officers_cohorts_countdisciplines;
 select cast (is_disciplined as decimal) / officers_with_allegations as allegations_w_action, cohort
-from officers_cohorts_countdisciplines
+from officers_cohorts_countdisciplines;
 
 -- Question 4: For each Cohort, describe the average police officer in terms of demographics, accusals, and payout data.
 -- By percentage:
@@ -333,6 +334,10 @@ CREATE TEMP TABLE officers_payouts AS (
            p.settlement + p.legal_fees as total_cost,
            d.gender,
            d.race,
+           d.birth_year,
+           d.appointed_date,
+           d.incident_date,
+
            -- FIXME: Calculate age of officer and years on force for each officer at time of each incident
 --            case when year(date) - year(data_officer.birth_year) between 21 and 24 then '21-24'
 --            when year(date) - year(data_officer.birth_year) between 25 and 34 then '25-34'
@@ -355,9 +360,11 @@ CREATE TEMP TABLE officers_payouts AS (
             on o.officer_id = d.officer_id
 );
 
---view results from demographics table above
-select * from officers_payouts;
+-- view results from demographics table above
+-- export and visualize
+SELECT * FROM officers_payouts;
 
+SELECT * FROM officers_cohorts_data;
 
 --sum of officers total_cpst
 DROP TABLE IF EXISTS officers_costs;
