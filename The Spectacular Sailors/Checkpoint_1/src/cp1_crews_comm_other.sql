@@ -142,7 +142,7 @@ CREATE TEMP TABLE officers_cohorts_data AS (
                        on "do".id = "doa".officer_id
              LEFT JOIN data_allegation "da"
                        on "doa".allegation_id = "da".crid
-             RIGHT JOIN officers_cohorts "oc"
+             INNER JOIN officers_cohorts "oc"
                        on "doa".officer_id = "oc".officer_id
     WHERE "do".id in (
         SELECT officers_cohorts.officer_id
