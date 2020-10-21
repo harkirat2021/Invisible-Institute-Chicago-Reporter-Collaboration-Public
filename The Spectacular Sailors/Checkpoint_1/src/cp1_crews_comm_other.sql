@@ -337,22 +337,11 @@ CREATE TEMP TABLE officers_payouts AS (
            d.birth_year,
            d.appointed_date,
            d.incident_date,
-
-           -- FIXME: Calculate age of officer and years on force for each officer at time of each incident
---            case when year(date) - year(data_officer.birth_year) between 21 and 24 then '21-24'
---            when year(date) - year(data_officer.birth_year) between 25 and 34 then '25-34'
---                when year(date) - year(data_officer.birth_year) between 35 and 44 then '35-44'
---                    when year(date) - year(data_officer.birth_year) between 45 and 54 then '45-54'
---                        when year(date) - year(data_officer.birth_year) between 55 and 64 then '55-64'
---                            when year(date) - year(data_officer.birth_year) >=65 then '65+' end as age_bucket,
---            case when year(date) - year(data_officer.appointed_date) between 0 and 9 then '0-9'
---                 when year(date) - year(data_officer.appointed_date) between 10 and 14 then '10-14'
---                     when year(date) - year(data_officer.appointed_date) between 15 and 19 then '15-19'
---                         when year(date) - year(data_officer.appointed_date) between 20 and 24 then '20-24'
---                             when year(date) - year(data_officer.appointed_date) between 25 and 29 then '25-29'
---                                 when year(date) - year(data_officer.appointed_date) >= 30 then '30+' end as years_service,
            d.disciplined_flag,
-           d.Coaccused_Count
+           d.Coaccused_Count,
+           DATE_PART('year', d.incident_date) - DATE_PART('year', d.appointed_date) as years_on_force_at_incident,
+           DATE_PART('year', d.incident_date) - DATE_PART('year', TO_TIMESTAMP(CAST(d.birth_year AS varchar), 'YYYY')) AS age_at_incident
+
     FROM lawsuit_lawsuit_officers o
         LEFT JOIN lawsuit_payment p
             on o.lawsuit_id = p.lawsuit_id
