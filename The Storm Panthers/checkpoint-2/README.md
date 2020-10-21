@@ -15,7 +15,7 @@ This visualization presents the frequency of words within summaries of home inva
     AND summary_words not in ('when', 'they', 'were', 'with', 'them', 'that', 'their', 'while')
 
 A preview of the visualization:
-![viz1](/images/wordcloud1screenshot.png)
+![viz1](/The Storm Panthers/checkpoint-2/images/wordcloud1screenshot.png)
 
 ## Viz #2: "What victims were doing when..." wordcloud
 This visualization presents what victims who received a settlement for a CPD home invasion were doing at the onset of the invasion. The larger the size of the text, the larger the settlement amount was. You can hover over each entry to view the total settlement amount. When browsing the Settling for Misconduct interface, we noticed that many of the summaries were written in the format, "\[victim\] was \[doing something\] when \[the police entered their home\]". Thus, we exploited this observation to extract substrings of the summaries that did follow that structure. We also filtered down to summaries that were between 2 than 100 characters (not inclusive) to clean out some substrings that were mistakenly grabbed. Below is the custom SQL query used to gather our data for this visualization:
@@ -25,5 +25,5 @@ This visualization presents what victims who received a settlement for a CPD hom
     select was_doing, cast(total_settlement as int) as amount, CONCAT('$', cast(total_settlement as int)) as tooltip from segments where length(was_doing) < 100 AND length(was_doing) > 2
 
 A preview of the visualization:
-![viz1](/images/wordcloud2screenshot.png)
+![viz2](/The Storm Panthers/checkpoint-2/images/wordcloud2screenshot.png)
 
