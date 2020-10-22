@@ -299,7 +299,7 @@ CREATE TEMP TABLE officers_cohorts_coaccused_counts AS (
            COUNT(DISTINCT officer_id) AS total_officers_count,
            SUM(coaccused_count) / COUNT(DISTINCT officer_id) AS avg_coaccusals_per_officer,
            COUNT(DISTINCT crid) AS unique_crid_count,
-           AVG(coaccused_count) AS avg_coaccusals_count_per_complaint
+           AVG(coaccused_count) AS avg_coaccusals_per_complaint
     FROM officers_cohorts_coaccused
     GROUP BY cohort
 );
@@ -397,7 +397,8 @@ CREATE TEMP TABLE officers_cohorts_counts AS (
            o.unique_crid_count,
            occd.is_disciplined,
            o.total_coaccusals,
-           o.avg_coaccused_count,
+           o.avg_coaccusals_per_officer,
+           o.avg_coaccusals_per_complaint,
            cast (occd.is_disciplined as decimal) / o.unique_crid_count as discplined_rate,
            ocs.total_cost,
            ot.avg_years_on_force_at_incident,
