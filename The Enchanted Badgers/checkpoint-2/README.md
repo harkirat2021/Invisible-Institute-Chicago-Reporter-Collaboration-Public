@@ -18,12 +18,12 @@ This will display the contents of the source directory in the web browser. Now s
 
 ### Question 1: Horizontal bar chart to visualize the distribution of complaints
 
-TBD: How to view this
+To view the visualization for question 1, click the *checkpoint2-q1.html* file
 
 ### Question 2: Stacked bar chart to visualize which category has the most uncategorized complaints, and what types of uncategorized complaints
 
-TBD: How to view this
+To view the visualization for question 2, click the *checkpoint2-q2.html* file
 
 ### Quesiton 3: Line chart to visualize the percentage of uncategorized complaints (year over year)
 
-TBD: How to view this
+To view the visualization for question 3, click the *checkpoint2-q3.html* file
