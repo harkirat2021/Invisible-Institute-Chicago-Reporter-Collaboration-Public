@@ -294,13 +294,20 @@ SELECT * FROM officers_cohorts_coaccused;
 -- Return a count of officers_cohorts_coaccused_counts
 DROP TABLE IF EXISTS officers_cohorts_coaccused_counts;
 CREATE TEMP TABLE officers_cohorts_coaccused_counts AS (
-    SELECT cohort, COUNT(DISTINCT crid) AS unique_crid_count, SUM(coaccused_count) AS total_coaccusals, AVG(coaccused_count) AS avg_coaccused_count
+    SELECT cohort,
+           SUM(coaccused_count) AS total_coaccusals,
+           COUNT(DISTINCT officer_id) AS total_officers_count,
+           SUM(coaccused_count) / COUNT(DISTINCT officer_id) AS avg_coaccusals_per_officer,
+           COUNT(DISTINCT crid) AS unique_crid_count,
+           AVG(coaccused_count) AS avg_coaccusals_count_per_complaint
     FROM officers_cohorts_coaccused
     GROUP BY cohort
 );
 
 -- view returned counts with coacussals
 SELECT * FROM officers_cohorts_coaccused_counts;
+
+
 
 -- Question 3: Within each Cohort, what percentage of allegations results in disciplinary action?
 -- Where the percentage is calculated by total allegations in cohort / total times disciplined in cohort.
@@ -311,13 +318,6 @@ from officers_cohorts_countdisciplines;
 
 -- Question 4: For each Cohort, describe the average police officer in terms of demographics, accusals, and payout data.
 -- By percentage:
---              Sex
---              Race
---              Age: 21-24; 25-34; 35-44; 45-54; 55-64; 65+
---              Years on the Force: 0-9; 10-14; 15-19; 20-24; 25-29; 30+
--- By Average:
---              Payout data in thousands of dollars
---              Accusations, Disciplinary actions, or percentage from Question 3
 
 -- create a table with all officer demographics
 DROP TABLE IF EXISTS officers_payouts;
@@ -350,7 +350,6 @@ CREATE TEMP TABLE officers_payouts AS (
 
 -- view results from demographics table above
 -- export and visualize
-
 SELECT * FROM officers_payouts;
 
 -- Visualizing total payment by cohort
@@ -365,18 +364,16 @@ CREATE TEMP TABLE officers_payoutbylawid AS (
 
 SELECT * FROM officers_payoutbylawid;
 
-SELECT * FROM officers_cohorts_data;
-
 --sum of officers total_cost
 DROP TABLE IF EXISTS officers_costs;
 CREATE TEMP TABLE officers_costs AS (
-    select cohort,
-           sum(total_payments) as total_cost, sum(total_settlement) as total_settlement_cost, sum(total_legal_fees) as total_legal_cost
-    from officers_payoutbylawid
-    group by cohort
+    SELECT cohort,
+           sum(total_payments) as total_cost,
+           sum(total_settlement) as total_settlement_cost,
+           sum(total_legal_fees) as total_legal_cost
+    FROM officers_payoutbylawid
+    GROUP BY cohort
 );
-
-
 
 -- view officers_cost table above
 SELECT * FROM officers_costs;
@@ -415,4 +412,15 @@ CREATE TEMP TABLE officers_cohorts_counts AS (
 
 -- View Counts table for Question 4
 SELECT * FROM officers_cohorts_counts;
+
+-- officers_cost
+SELECT occ.cohort,
+       occ.total_officers,
+       occ.total_cost / occ.total_officers as avg_cost_per_officer,
+       occ.total_cost,
+       oc.total_legal_cost,
+       oc.total_settlement_cost
+FROM officers_cohorts_counts occ
+LEFT JOIN officers_costs oc on occ.cohort = oc.cohort
+ORDER BY cohort ASC;
 
