@@ -11,8 +11,9 @@ Some of the visualizations we produce make use of the output from these classifi
 
 To view the visualizations simply:
 * open terminal and navigate to checkpoint 2 source file (e.g. checkpoint-2/src)
-* start a python server with the following command: python3 -m http.server
+* start a python server with the following command: `python3 -m http.server`
 * open a web browser and cut and paste the following URL: http://0.0.0.0:8000/
+
 This will display the contents of the source directory in the web browser. Now simply click the visualization you want to view.
 
 ### Question 1: Horizontal bar chart to visualize the distribution of complaints
