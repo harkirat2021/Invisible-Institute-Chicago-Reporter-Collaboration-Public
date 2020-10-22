@@ -23,7 +23,9 @@ This will generate the following visualization:
 
 ![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-2/screenshots/visualization1.png)
 
-### Question 2: Stacked bar chart to visualize which category has the most uncategorized complaints, and what types of uncategorized complaints
+### Question 2: A grouped bar chart showing the classifications of uncategorized complaints using various language models
+
+*Note: This question was originally "Stacked bar chart to visualize which category has the most uncategorized complaints, and what types of uncategorized complaints" in our project proposal, but was changed due to a lack of data. A more detailed explanation for this change is provided in the analysis for this question in the findings.pdf for this checkpoint.*
 
 To view the visualization for question 2, click the *checkpoint2-q2.html* file
 
