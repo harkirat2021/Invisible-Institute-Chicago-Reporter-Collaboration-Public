@@ -6,7 +6,7 @@ This code was tested using Python 3.7.5 on MacOS 10.15. Make sure you have insta
 
 ## Downloading and Prepping the Necessary Data
 
-Download the file from (here)[https://github.com/invinst/documentAnalysis/blob/master/data/input/narratives.csv] as `narratives.csv` and place it in `src/complaint_classification/narrative_integration`
+Download the file from [here](https://github.com/invinst/documentAnalysis/blob/master/data/input/narratives.csv) as `narratives.csv` and place it in `src/complaint_classification/narrative_integration`
 
 Download a dump of the `data_allegation` table as `data_allegation.csv` using the following SQL query against the CPDP database: `SELECT * FROM data_allegation`. You can use DataGrip download the results as a CSV file.
 
