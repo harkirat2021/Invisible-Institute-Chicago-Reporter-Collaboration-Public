@@ -18,22 +18,22 @@ This will display the contents of the source directory in the web browser. Now s
 ### Question 1: Horizontal bar chart to visualize the distribution of complaints
 
 To view the visualization for question 1, click the *checkpoint2-q1.html* file
+This will generate the following visualization:
 
-Vizualization for Question 1
 ![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-2/screenshots/visualization1.png)
 
 ### Question 2: Stacked bar chart to visualize which category has the most uncategorized complaints, and what types of uncategorized complaints
 
 To view the visualization for question 2, click the *checkpoint2-q2.html* file
+This will generate the following visualization:
 
-Vizualization for Question 2
 ![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-2/screenshots/visualization2.png)
 
 ### Quesiton 3: Line chart to visualize the percentage of uncategorized complaints (year over year)
 
 To view the visualization for question 3, click the *checkpoint2-q3.html* file
+This will generate the following visualization:
 
-Vizualization for Question 3
 ![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-2/screenshots/visualization3.png)
 
 ## Retrieving Datasets (Optional)
