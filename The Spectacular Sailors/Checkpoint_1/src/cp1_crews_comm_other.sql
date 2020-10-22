@@ -328,9 +328,9 @@ CREATE TEMP TABLE officers_payouts AS (
            d.cohort,
            d.crid,
            o.lawsuit_id,
-           p.settlement,
-           p.legal_fees,
-           p.settlement + p.legal_fees as total_cost,
+           l.total_legal_fees,
+           l.total_settlement,
+           l.total_payments,
            d.gender,
            d.race,
            d.birth_year,
@@ -342,15 +342,28 @@ CREATE TEMP TABLE officers_payouts AS (
            DATE_PART('year', d.incident_date) - DATE_PART('year', TO_TIMESTAMP(CAST(d.birth_year AS varchar), 'YYYY')) AS age_at_incident
 
     FROM lawsuit_lawsuit_officers o
-        LEFT JOIN lawsuit_payment p
-            on o.lawsuit_id = p.lawsuit_id
+        LEFT JOIN lawsuit_lawsuit l
+            on o.lawsuit_id = l.id
         LEFT JOIN officers_cohorts_data d
             on o.officer_id = d.officer_id
 );
 
 -- view results from demographics table above
 -- export and visualize
+
 SELECT * FROM officers_payouts;
+
+-- Visualizing total payment by cohort
+DROP TABLE IF EXISTS officers_payoutbylawid;
+CREATE TEMP TABLE officers_payoutbylawid AS (
+    SELECT op.officer_id, op.lawsuit_id, op.cohort, op.total_legal_fees, op.total_settlement, op.total_payments
+    FROM officers_payouts op
+    JOIN (SELECT lawsuit_id, min(crid) as minid from officers_payouts group by lawsuit_id) y
+    ON y.lawsuit_id = op.lawsuit_id
+    AND y.minid = op.crid
+);
+
+SELECT * FROM officers_payoutbylawid;
 
 SELECT * FROM officers_cohorts_data;
 
@@ -358,10 +371,12 @@ SELECT * FROM officers_cohorts_data;
 DROP TABLE IF EXISTS officers_costs;
 CREATE TEMP TABLE officers_costs AS (
     select cohort,
-           sum(total_cost) as total_cost
-    from officers_payouts
+           sum(total_payments) as total_cost, sum(total_settlement) as total_settlement_cost, sum(total_legal_fees) as total_legal_cost
+    from officers_payoutbylawid
     group by cohort
 );
+
+
 
 -- view officers_cost table above
 SELECT * FROM officers_costs;
