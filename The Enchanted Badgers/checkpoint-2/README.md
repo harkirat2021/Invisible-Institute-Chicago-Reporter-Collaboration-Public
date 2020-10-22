@@ -6,7 +6,6 @@ For this checkpoint, we needed to build and train a machine learning model to cl
 
 Some of the visualizations we produce make use of the output from these classification models. We have included the classification results within that directory (entitled `uncategorized_results_boe.json` and `uncategorized_results_bert.json` for the bag of embeddings and BERT classifiers respectively). A detailed description of how we completed that entire process is including in the `findings.pdf` for this checkpoint. 
 
-
 ## Questions and How to View the Answers
 
 To view the visualizations simply:
@@ -27,3 +26,22 @@ To view the visualization for question 2, click the *checkpoint2-q2.html* file
 ### Quesiton 3: Line chart to visualize the percentage of uncategorized complaints (year over year)
 
 To view the visualization for question 3, click the *checkpoint2-q3.html* file
+
+## Retrieving Datasets (Optional)
+The datasets for the visualizations have already been provided, so you only need to run these queries if you want to verify the contents of the datasets. Note that these instructions apply for questions 1 and 3. The dataset for question 2 was generated using a transformer model as outlined in our findings.
+
+### Method 1: Use PSQL
+
+From within the `/src` directory you can use PSQL in order to interface with the remote AWS database using the following command.
+
+`psql -f <QUESTION_FILENAME>.sql -h cpdb.cgod7egsd6vr.us-east-2.rds.amazonaws.com -U cpdb-student -d cpdb -p 5432`
+
+and replacing <QUESTION_FILENAME> with the approriate query file name. For example, running the query for Question 1 would be as follows:
+
+`psql -f Q1.sql -h cpdb.cgod7egsd6vr.us-east-2.rds.amazonaws.com -U cpdb-student -d cpdb -p 5432`
+
+When prompted for a password, simply enter the password found within the setup instructions for Checkpoint 1 on Canvas (this is omitted here for security reasons).
+
+### Method 2: DataGrip
+
+In order to run these queries with DataGrip, you'll first need to make sure you have an active connection to the `cpdb` database. With that in place, simply open the `.sql` files in the `/src` directory and hit run. Alternatively, you can copy and paste the queries from the file into the DataGrip console and run them there.
