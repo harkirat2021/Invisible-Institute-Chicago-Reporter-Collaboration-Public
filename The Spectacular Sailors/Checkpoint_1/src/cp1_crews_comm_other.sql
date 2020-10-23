@@ -153,6 +153,26 @@ CREATE TEMP TABLE officers_cohorts_data AS (
 -- View the result of query 1 breakouts by cohort
 SELECT * FROM officers_cohorts_data;
 
+DROP TABLE IF EXISTS officers_cohorts_genders;
+CREATE TEMP TABLE officers_cohorts_genders AS (
+    SELECT cohort, gender, COUNT(DISTINCT officer_id) AS officers_count
+    FROM officers_cohorts_data
+    GROUP BY 1, 2
+    ORDER BY cohort ASC
+);
+
+SELECT * FROM officers_cohorts_genders;
+
+DROP TABLE IF EXISTS officers_cohorts_race;
+CREATE TEMP TABLE officers_cohorts_race AS (
+    SELECT cohort, race, COUNT(DISTINCT officer_id) AS officers_count
+    FROM officers_cohorts_data
+    GROUP BY 1, 2
+    ORDER BY cohort ASC
+);
+
+SELECT * FROM officers_cohorts_race;
+
 -- Data Note: The total population of officers is reduced to 23,444 (not all officers have allegations)
 -- There are 23,444 distinct officer IDs in data_officer_allegation
 -- def: disciplined_good is a sum of all disciplinary actions
