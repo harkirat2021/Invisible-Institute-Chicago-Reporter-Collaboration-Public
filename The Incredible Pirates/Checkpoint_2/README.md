@@ -1,4 +1,5 @@
-# Checkpoint 2: Hawkins Gay, Alex Leidner, Ramsey Wehbe <br />
+# Checkpoint 2: Data Visualization
+## Hawkins Gay, Alex Leidner, Ramsey Wehbe <br />
 
 
 ## Theme:
