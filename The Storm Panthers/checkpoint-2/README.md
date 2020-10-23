@@ -1,9 +1,9 @@
 # Checkpoint 2: Data Visualization
 
-### Accessing our Tableau visualizations
-Navigate to the source folder, click on `visualizations.twbx`. On the following screen, click on `download`. Once it finishing downloading, open the file to launch Tableau Desktop. If and when you are prompted for a password, enter **dataSci4lyf**. In the event that you are asked if you wish to import custom sql and/or connections, select **yes**.
+## Accessing our Tableau visualizations
+Navigate to the source folder and open `visualizations.twbx` to launch Tableau Desktop. If navigating there from GitHub, click on that file name and then click `download` on the following screen. If and when you are prompted for a password, enter **dataSci4lyf**. In the event that you are asked if you wish to import custom sql and/or connections, select **yes**.
 
-Each of our visualizations lives on its own sheet in the workbook. The sheet names and corresponding visualizations are as follows:
+Each of our visualizations lives on its own sheet or dashboard in the workbook. The sheet/dashboard names and corresponding visualizations are detailed below. The last three sheets in the workbook are combined into the dashboard, so there is no need to view those separately unless desired.
 
 ## Viz #1: frequency wordcloud
 This visualization presents the frequency of words within summaries of home invasion settlement cases (sourced from the Settling for Misconduct Dataset that is now available in cpdb). The bigger the word, the more often it appears in summaries. You can hover a word to view this frequency. In our custom SQL statement, we filtered for words that are greater than 3 characters long, transformed all words to lowercase, filtered to words that appeared 50 or more times, and finally, we removed the following words from the dataset: when, they, were, with, them, that, their, while. Below is the custom SQL query used to gather our data for this visualization:
@@ -26,3 +26,26 @@ This visualization presents what victims who received a settlement for a CPD hom
 
 A preview of the visualization:
 ![viz2](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/master/The%20Storm%20Panthers/checkpoint-2/images/wordcloud2screenshot.png?raw=true)
+
+## Viz #3: Settlement expenditure dashboard
+This dashboard features three graphs:
+
+ * CPD total settlement expenditures by year
+ * CPD home invasion settlement expenditures by year
+ * How much of CPD's yearly settlement expenditures are from home invasion cases?
+
+ Because the `incidents` column stores arrays of the one or more incident types, the second and third graphs required a custom SQL query to extract only the home invasion cases.
+
+ The custom SQL query for the second graph:
+    
+    select incident_date, total_settlement from lawsuit_lawsuit where 'Home invasion'=ANY(interactions)
+
+
+ The custom SQL query was used for the final graph:
+
+    with all_settlements as (select extract(year from incident_date) as year, sum(total_settlement) as total from lawsuit_lawsuit group by year),
+    home_settlements as (select extract(year from incident_date) as year2, sum(total_settlement) as home from lawsuit_lawsuit where 'Home invasion'=ANY(interactions) group by year2)
+    select cast(year as int), home, total, home/total*100 as percent_of_total from all_settlements inner join home_settlements on all_settlements.year=home_settlements.year2
+
+A preview of the visualization:
+![viz3](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/master/The%20Storm%20Panthers/checkpoint-2/images/viz3screenshot.png?raw=true)
