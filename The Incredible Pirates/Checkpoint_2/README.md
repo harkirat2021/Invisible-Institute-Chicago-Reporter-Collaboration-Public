@@ -7,7 +7,7 @@
    
    As the course advances this topic would lend itself to traversing through the data parsing and visualization modules planned. While these are enumerated below, the ultimate task would be to try to parse through reports, using NLP, to add medical resource utilization to the known outcomes of TRR reports, either through parsing reports or inclusion of civil suits. This data, currently not included in attributes, would provide strong additional evidence to explore individual and societal impact.
 
-##Running the code
+## Running the code
 
 This section of the code is to create Tableau visualizations. Created visualizations can be seen in the PDF or in the Tableau Workbook. <br />
 These images were createad with psql 9.06.0201. <br />
