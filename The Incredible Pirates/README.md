@@ -10,6 +10,6 @@ Data Science Seminary Fall 2020 <br />
    
 ## Checkpoints:
 [Checkpoint 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/tree/master/The%20Incredible%20Pirates/Checkpoint%201) <br />
-[Checkpoint 2](https://github.com/rmw362/Invisible-Institute-Chicago-Reporter-Collaboration-Public/tree/master/The%20Incredible%20Pirates/Checkpoint_2) <br />
+[Checkpoint 2](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/tree/master/The%20Incredible%20Pirates/Checkpoint_2) <br />
  
    
