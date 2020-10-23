@@ -16,7 +16,7 @@ If this file does not allow for visualization please follow the steps ahead to i
 
 ## Questions
  1)	[Use of force incidents by demographics (race, gender, age) and percentage that result in injury or lead to emergency medical attention](#Question-1) 
- 2)	[Symbol/bubble map to assess geographic distribution for proportion of use of force incidents that result in injury.](#Question-2)
+ 2)	[Chloropleth map to assess geographic distribution for proportion of use of force incidents that result in injury.](#Question-2)
  
 ## Question-1
 Use of force incidents by demographics (race, gender, age) and percentage that result in injury or lead to emergency medical attention <br />
