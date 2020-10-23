@@ -17,7 +17,7 @@ If this file does not allow for visualization please follow the steps ahead to i
 
 ## Questions
  1)	[Use of force incidents by demographics (race, gender, age) and percentage that result in injury or lead to emergency medical attention](#Question-1) 
- 2)	[Chloropleth map to assess geographic distribution for proportion of use of force incidents that result in injury.](#Question-2)
+ 2)	[Choropleth map to assess geographic distribution for proportion of use of force incidents that result in injury.](#Question-2)
  
 ## Question-1
 Use of force incidents by demographics (race, gender, age) and percentage that result in injury or lead to emergency medical attention <br />
@@ -72,7 +72,7 @@ Data for Figure 1.5 and 1.6. Save as Result_64.csv
   	ORDER BY total_use_of_force_events DESC;
   
 ## Question-2
-Question 2: Chloropleth map to assess geographic distribution for proportion of use of force incidents that result in injury. <br />
+Question 2: Choropleth map to assess geographic distribution for proportion of use of force incidents that result in injury. <br />
 For ease of use, csv files have been provided to link to Tableau. Please open .src\Checkpoint_2_Workbook.twb. After opening the workbook you must enter the correct password for cpdb-student. Please refer to the canvas for this password <br />
 Please link the district and district % Sheet with .CP2\District_HCG.csv <br />
 
