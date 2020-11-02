@@ -41,7 +41,7 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/master/The%20Wicked%20Roadrunners/Checkpoint-3/district_data_cleaned.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/master/The%20Wicked%20Roadrunners/Checkpoint-3/src/district_data_cleaned.csv", function(data) {
 
     // List of groups (here I have one group per column)
     var allGroup = d3.map(data, function(d){return(d.district)}).keys()
