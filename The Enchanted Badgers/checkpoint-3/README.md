@@ -6,7 +6,7 @@
 
 ## Questions and How to View the Answers
 
-Each of the visualizations was produced on https://observablehq.com/using using D3.js. To view the visualizations for each question, simply navigate to the link provided for it in the following sections.
+Each of the visualizations was produced on https://observablehq.com/ using D3.js. To view the visualizations for each question, simply navigate to the link provided for it in the following sections.
 
 ### Question 1: Horizontal bar chart to visualize the distribution of complaints
 
