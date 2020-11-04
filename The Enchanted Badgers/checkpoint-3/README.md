@@ -36,8 +36,8 @@ All LDA topic models have already been generated, but this sections contains dir
 1. Run “pip install -r requirements_lda.txt”
 2. Run “python -m spacy download en_core_web_lg”
 3. Run “python lda.py”. This file preprocesses the narrative summaries and feeds it into Scikit-Learn’s LDA. We train 10 different LDA models, each with 20 topics described by 12 words each. 
-  1. This choice was driven by qualitative analysis. We opted for 20 topics because we wanted roughly as many categories as for the original complaints. The 12 words per topic was largely subjective - we decided on it because we found the different topics were more explainable with that number of words, in addition to not having single words show up repeatedly over many topics - a word helping define a few topics is good, but if it defines many topics it becomes meaningless.
-  2. “lda.py” outputs a new directory “lda_models_and_test_files” which contains the models and the words that define the topics for each model
+    1. This choice was driven by qualitative analysis. We opted for 20 topics because we wanted roughly as many categories as for the original complaints. The 12 words per topic was largely subjective - we decided on it because we found the different topics were more explainable with that number of words, in addition to not having single words show up repeatedly over many topics - a word helping define a few topics is good, but if it defines many topics it becomes meaningless.
+  * “lda.py” outputs a new directory “lda_models_and_test_files” which contains the models and the words that define the topics for each model
 4. Run “python lda_topic_freq_and_summaries.py”
   1. This outputs a new directory “lda_topic_csv_files” with accompanying csv files used for the interactive visualizations
 5. Run “python csv_script.py”
