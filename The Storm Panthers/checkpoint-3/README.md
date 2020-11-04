@@ -1,4 +1,7 @@
+# Disclaimer: we are still actively working on finishing Viz 1, stay tuned!
+
 ## Viz 1: Map of Chicago Home Invasions
+[See the current status of the visualization here](https://observablehq.com/d/e3f86aa0ce617ce1)
 
 ### Observations: 
 
