@@ -5,4 +5,4 @@
 
   Q2: A scatter plot matrix showing the relationship between officer race percentage within community vs. complaint filer race percentage within the community. 
   
-  Link: https://observablehq.com/d/a210438ec4686c6e. 
+  Link: https://observablehq.com/d/a210438ec4686c6e
