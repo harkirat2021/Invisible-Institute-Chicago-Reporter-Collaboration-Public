@@ -20,4 +20,4 @@ Upon entering the link for each timespan, you can see the generated interactive 
 
 Notebook for Question 2: https://observablehq.com/@jassiay0/sunburst
 
-This notebook is for our second question in this checkpoint. It generates a sunburst graph that intuitively shows the number of allegations and the categories of misconduct across the 3 timespans. Make sure to click the run button on the right side of the cells when you view or fork the notebook.
+This notebook is for our second question in this checkpoint. It generates a sunburst graph that intuitively shows the number of allegations and the categories of misconduct across the 3 timespans. *Make sure* to click the run button on the right side of the last cell if the graph does not show up when you view or fork the notebook.
