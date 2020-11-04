@@ -14,12 +14,16 @@ Each of the visualizations was produced on https://observablehq.com/ using D3.js
 
 To view interactive visualization 1, go here: https://observablehq.com/@servantez/checkpoint-3-interactive-visualization-and-data-explorat/3
 
+![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-3/screenshots/viz_1.png)
 
 ### Visualization 2: Filtered Sankey diagram to visualize how 10 different LDA topic models classified preexisting complaint categories into topics
 
 To view interactive visualization 2, go here: https://observablehq.com/@servantez/checkpoint-3-interactive-visualization-and-data-explorat/2
 
+![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-3/screenshots/viz_2.png)
 
 ### Visualization 3: Hierarchical Bar Chart to visualize how preexisting complaint categories are classified by our LDA topic modeling
 
 To view interactive visualization 3, go here: https://observablehq.com/@servantez/checkpoint-3-interactive-visualization-and-data-explorat
+
+![visualization 1](https://github.com/Northwestern-Data-Sci-Seminar/Invisible-Institute-Chicago-Reporter-Collaboration-Public/blob/enchanted-badgers/The%20Enchanted%20Badgers/checkpoint-3/screenshots/viz_3.png)
