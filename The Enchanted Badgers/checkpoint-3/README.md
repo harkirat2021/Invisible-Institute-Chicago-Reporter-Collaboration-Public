@@ -2,7 +2,7 @@
 
 ## Important Info
 
-...insert checkpoint description here...
+For this checkpoint, we needed to perform topic modeling in order to generate a set of new categories with which we can re-categorize the existing set of complaints based on their summary text. To this end, we put together code for performing Latent Dirichlet Analysis (LDA) to produce a set of topics based on the summary text of the complaints. Full instructions for how to run the LDA to generate the topics is included in the `findings.pdf` for this checkpoint. Note that LDA is a non-deterministic process and the same set of topics are not guaranteed to be created during successive runs.
 
 ## Questions and How to View the Answers
 
