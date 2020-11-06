@@ -19,5 +19,19 @@ There are several things not captured by this visualization. For one, the races 
 ## Viz 3: Breakdown of Officers Implicated in Home Invasions Over Time by Race, Gender, and Age
 [See visualization here](https://observablehq.com/@brendoneby/officers-involved-in-home-invasion-cases-per-1000-active-of)
 
-### Observations: 
+This visualization shows the incident rates of allegations of “search of premises without warrant” based on the demographics of the officers involved.  As there is an unequal distribution of officer demographics within the police force (white males make up the largest group), we chose to show incident rates per 1000 officers that meet the user-specified parameters.  For this question, we chose to focus on all premises searches that are either private residences or of unknown location type, as there is not enough data for private residences alone.
 
+This rate is found by dividing total incidents in each year (query c3_q3a.sql) by the total estimated officers on the force in the specified year (query c3_q3b.sql), then multiplied by 1000.  Before division, both lists are filtered as specified by the user.  We looked at gender, age group, and race as available filters.
+
+### Observations: 
+1. By changing the demographic parameters we can see the incident rates over time for each demographic group.  These demographics showed the following trends:
+    1. Male officers are more than twice as likely to be involved in these incidents than female officers.
+    2. Officers in their 20s and 30s are far more likely to be involved in these incidents than officers 40 and above, again more than double the rates of higher age groups.  These rates go down in every subsequent age group.
+    3. White and Hispanic officers are more likely to be involved in these incidents than other ethnicities.
+    4. Combining the above observations, we can see that young white and hispanic males are by far the most likely officers to be involved with illegal searches, even after controlling for overall demographics within the police force. 
+
+2. All groups show a decrease in frequency of incidents over the last 20 years, especially after 2010. This may be due to increased public scrutiny of these kinds of practices, and easier access to documenting methods such as cell phones.
+
+3. Incidents overall increased until they peaked in the year 2000, then have decreased since then.  This is not uniform across demographics however.  In fact, it appears that white males (the largest demographic and therefore the most influential for overall trends) is the only demographic that shows this trend.  All other demographics show a general downward trend from the 90s through now.  This is curious, and it would be interesting to see what caused this unusual pattern among white men.
+
+4. Despite overall trends among non-white-male demographics being downward over time, most demographics had a spike in incidents in the year 2000 specifically, showing significantly higher rates than usual.  This would be interesting to look further into as well, perhaps there was a legal change that drove this trend.
