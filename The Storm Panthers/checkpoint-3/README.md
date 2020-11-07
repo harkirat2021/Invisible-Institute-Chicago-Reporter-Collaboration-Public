@@ -1,9 +1,16 @@
-# Disclaimer: we are still actively working on finishing Viz 1, stay tuned!
+# Chackpoint 3: Interactive Visualization
+
+To view our D3 code and visualizations, please click on the links in the README below. Our SQL queries can be found in the src folder.
 
 ## Viz 1: Map of Chicago Home Invasions
-[See the current status of the visualization here](https://observablehq.com/d/e3f86aa0ce617ce1)
+[See visualization here](https://observablehq.com/@mandydavis/allegations-of-police-misconduct-in-chicago-with-an-emphas)
+This visualization used the results of query c3_q1 and c3_q1b. It is a map of Chicago that breaks the city down into community areas and presents the number of allegations that have occurred in each area, along with demographic data and points representing the location of allegations that appear to be police-led home invasions. 
 
 ### Observations: 
+Hovering over each area makes it very clear that the areas that are most affected by police misconduct are very highly populated by black residents. We can also see a cluster of home invasion points surrounding one of those most highly impacted areas, suggesting that home invasion misconducts may be associated with misconducts in general, which is to be expected. Another takeaway is that Chicago, in terms of police misconduct allegations, cannot be clearly separated into, for example, a "South Side" and a "North Side." People familiar with only these terms and their associations may have predicted a more smooth gradient on the map in terms of color. However, it is clear that there are pockets higher in allegation count on the West side of the city, the South side of the city, and other areas in between.
+
+# Drawbacks:
+By looking at the map, we can see that there are two points that fall outside of the boundaries of Chicago. Theoretically, no point should exist in this database that does not belong within Chicago, but this visualization demonstrates that is not true. Based on looking at other points stored in the database, we also know that there are much more than just these two points that fall into that category. This faulty data made it very difficult to find a robust method for mapping all data completely and accurately. Another drawback is the limitations that come along with the constraint of needing to select one area type to map. For example, not all area types contain data regarding demographics, so since demographics were important to us in this visualization, we could not have mapped based on beats, for example. 
 
 ## Viz 2: Breakdown of Home Invasion Victims by Race and Gender
 [See visualization here](https://observablehq.com/@fobkid20/victim-gender-race-3)
